@@ -18,7 +18,6 @@
 
 #include "mandelbrot.h"
 #include "mix.h"
-#include <Eigen/Array>
 #include <limits>
 
 #ifdef THIS_PATH_WITH_SSE2_EXPLICTLY_ENABLED

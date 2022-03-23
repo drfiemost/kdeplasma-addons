@@ -3,8 +3,6 @@ macro_log_feature(EIGEN3_FOUND "Eigen3" "Eigen3 enables the Mandelbrot wallpaper
 
 if(EIGEN3_FOUND)
 
-add_definitions(-DEIGEN2_SUPPORT)
-
 project(plasma-wallpaper-mandelbrot)
 
 include_directories(${EIGEN3_INCLUDE_DIR})
