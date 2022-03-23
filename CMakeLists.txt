@@ -29,6 +29,8 @@ macro_optional_find_package(Nepomuk)
 macro_log_feature(NEPOMUK_FOUND "Nepomuk" "Handles all kinds of metadata on the KDE desktop to provide a semantic desktop" "http://nepomuk.kde.org/" FALSE "" "STRONGLY_RECOMMENDED: Nepomuk is used to provide metadata on objects like files, emails etc. to provide a semantic desktop.")
 macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
 
+macro_optional_find_package(KDeclarative)
+macro_log_feature(KDeclarative_FOUND "kdeclarative" "KDE Declarative (QML) support from kdelibs" "http://www.kde.org" FALSE "" "Required by qmlwallpapers")
 
 macro_optional_find_package(QJSON)
 macro_log_feature(QJSON_FOUND "QJSon" "Used for various Internet runners, for parsing API responses, and the microblog dataengine" "" FALSE "" "")
