@@ -1,12 +1,13 @@
-find_package(Eigen2 2.0.3)
-macro_log_feature(EIGEN2_FOUND "Eigen2" "Eigen2 enables the Mandelbrot wallpaper plugin." "http://eigen.tuxfamily.org" FALSE "2.0.3")
+find_package(Eigen3 2.0.3)
+macro_log_feature(EIGEN3_FOUND "Eigen3" "Eigen3 enables the Mandelbrot wallpaper plugin." "http://eigen.tuxfamily.org" FALSE "2.0.3")
 
-if(EIGEN2_FOUND)
+if(EIGEN3_FOUND)
 
+add_definitions(-DEIGEN2_SUPPORT)
 
 project(plasma-wallpaper-mandelbrot)
 
-include_directories(${EIGEN2_INCLUDE_DIR})
+include_directories(${EIGEN3_INCLUDE_DIR})
 
 set(mandelbrot_SRCS
     mandelbrot.cpp
@@ -87,4 +88,4 @@ target_link_libraries(plasma_wallpaper_mandelbrot ${KDE4_PLASMA_LIBS} ${KDE4_KIO
 install(TARGETS plasma_wallpaper_mandelbrot DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-wallpaper-mandelbrot.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
-endif(EIGEN2_FOUND)
+endif(EIGEN3_FOUND)

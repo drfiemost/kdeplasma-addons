@@ -43,17 +43,12 @@ struct mandelbrot_render_tile_impl
   // Examples:
   //  * no vectorization: then packet_size == 1 always
   //  * SSE or AltiVec: then packet_size is 4 if Real==float and is 2 if Real==double
-  enum { packet_size = Eigen::ei_packet_traits<Real>::size };
+  enum { packet_size = Eigen::internal::packet_traits<Real>::size };
 
   // with Eigen, if we use vectors of the right size, operations on them will be compiled
   // as operations on SIMD packets
-  typedef Eigen::Matrix<Real, packet_size, 1> Packet;
-  typedef Eigen::Matrix<int, packet_size, 1> Packeti;
-
-  // normally we wouldn't need to do that, but since some compilers can miss optimizations,
-  // in the most critical code, let's play directly with SIMD registers. It's completely equivalent
-  // to Eigen vectors of the right size, just less subtle for the compiler to get right.
-  typedef typename Eigen::ei_packet_traits<Real>::type LowlevelPacket;
+  typedef Eigen::Array<Real, packet_size, 1> Packet;
+  typedef Eigen::Array<int, packet_size, 1> Packeti;
 
   // how many iterations we do before testing for divergence. See comment above for struct iter_before_test.
   // must be a multiple of 4 as we'll peel the inner loop by 4
@@ -154,35 +149,17 @@ void mandelbrot_render_tile_impl<Real>::computePacket(int x, int y, Color3 *pixe
     /* perform iter_before_test iterations */
     for(int i = 0; i < iter_before_test/4; i++) // we peel the inner loop by 4
     {
-      LowlevelPacket lpzr, lpzi;
       for(int repeat = 0; repeat < 4; repeat++)
       {
-        lpzr = Eigen::ei_pload(pzr.data());
-        lpzi = Eigen::ei_pload(pzi.data());
-        Eigen::ei_pstore(pzr.data(),
-                          Eigen::ei_padd(
-                            Eigen::ei_psub(
-                              Eigen::ei_pmul(lpzr,lpzr),
-                              Eigen::ei_pmul(lpzi,lpzi)
-                            ),
-                            Eigen::ei_pload(pcr.data())
-                          )
-                        );
-        Eigen::ei_pstore(pzi.data(),
-                          Eigen::ei_padd(
-                            Eigen::ei_pmul(
-                              Eigen::ei_padd(lpzr,lpzr),
-                              lpzi
-                            ),
-                            Eigen::ei_pload(pci.data())
-                          )
-                        );
+        Packet pzrt = pzr*pzr - pzi*pzi + pcr;
+        pzi = 2*pzr*pzi + pci;
+        pzr = pzrt;
       }
     }
 
     /* test for divergence */
-    pzabs2 = pzr.cwise().square();
-    pzabs2 += pzi.cwise().square();
+    pzabs2 = pzr.array()*pzr.array();
+    pzabs2 += pzi.array()*pzi.array();
     for(int i = 0; i < packet_size; i++) {
       if(!(pixel_diverge[i])) {
         if(pzabs2[i] > square_bailout_radius) {
@@ -213,13 +190,13 @@ void mandelbrot_render_tile_impl<Real>::computePacket(int x, int y, Color3 *pixe
   do
   {
     pzr_buf = pzr;
-    pzr = pzr.cwise().square();
-    pzr -= pzi.cwise().square();
+    pzr = pzr.array()*pzr.array();
+    pzr -= pzi.array()*pzi.array();
     pzr += pcr;
-    pzi = (2*pzr_buf).cwise()*pzi;
+    pzi = (2*pzr_buf).array()*pzi;
     pzi += pci;
-    pzabs2 = pzr.cwise().square();
-    pzabs2 += pzi.cwise().square();
+    pzabs2 = pzr.array()*pzr.array();
+    pzabs2 += pzi.array()*pzi.array();
     for(int i = 0; i < packet_size; i++) {
       if(!(pixel_diverge[i])) {
         if(pzabs2[i] > square_bailout_radius) {
@@ -298,7 +275,7 @@ template<typename Real> void mandelbrot_render_tile(
 
 #if defined(HAVE_PATH_WITH_SSE2_EXPLICTLY_ENABLED) || !defined(THIS_PATH_WITH_SSE2_EXPLICTLY_ENABLED)
 
-  enum { packet_size = Eigen::ei_packet_traits<Real>::size };
+  enum { packet_size = Eigen::internal::packet_traits<Real>::size };
   Color3 dummy_buffer[packet_size];
   
   mandelbrot_render_tile_impl<Real> renderer(mandelbrot, tile);
