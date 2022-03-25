@@ -117,7 +117,7 @@ target_link_libraries(
    ${KDE4WORKSPACE_TASKMANAGER_LIBRARY}
    ${LANCELOT_LIBS}
    ${ADDITIONAL_LINK_LIBRARIES}
-   kworkspace
+   ${KDE4WORKSPACE_KWORKSPACE_LIBS}
 )
 
 set_target_properties(lancelot-datamodels PROPERTIES VERSION 1.7.0 SOVERSION 1)
