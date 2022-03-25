@@ -78,7 +78,6 @@ class Timer : public Plasma::Applet
         void reverseBlinkAnim();
 
     private:
-        void setBlinking(bool blinking);
         void saveTimer();
         void setSeconds(int seconds);
 

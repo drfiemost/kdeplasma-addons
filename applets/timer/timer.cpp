@@ -391,7 +391,7 @@ void Timer::startTimer()
 {
     m_running = true;
     saveTimer();
-    setBlinking(false);
+    setDigitOpacity(1.0);
     m_timer.start(1000);
 
     m_startAction->setEnabled(false);
@@ -403,7 +403,7 @@ void Timer::stopTimer()
 {
     m_running = false;
     saveTimer();
-    setBlinking(true);
+    setDigitOpacity(0.3);
     m_timer.stop();
 
     m_startAction->setEnabled(true);
@@ -415,7 +415,7 @@ void Timer::resetTimer()
 {
     m_running = false;
     saveTimer();
-    setBlinking(false);
+    setDigitOpacity(1.0);
     m_timer.stop();
 
     setSeconds(m_startingSeconds);
@@ -501,17 +501,6 @@ void Timer::toggleTimerVisible()
     m_blinkAnim->setDirection(qFuzzyCompare(m_hoursDigit[0]->opacity(), 1.0) ?
                               QAbstractAnimation::Forward : QAbstractAnimation::Backward);
     m_blinkAnim->start();
-}
-
-void Timer::setBlinking(bool blinking)
-{
-    if (blinking) {
-        toggleTimerVisible();
-        connect(m_blinkAnim, SIGNAL(finished()), this, SLOT(reverseBlinkAnim()));
-    } else if (m_blinkAnim) {
-        disconnect(m_blinkAnim, SIGNAL(finished()), this, SLOT(reverseBlinkAnim()));
-        m_blinkAnim->setDirection(QAbstractAnimation::Backward);
-    }
 }
 
 qreal Timer::digitOpacity() const
