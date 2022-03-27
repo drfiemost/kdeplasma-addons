@@ -25,32 +25,9 @@
 #include <KIO/NetAccess>
 #include <KTemporaryFile>
 
-#ifdef HAVE_NEPOMUK
-#include <Nepomuk/Resource>
-#include <Nepomuk/ResourceManager>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
-#include <Nepomuk/Vocabulary/NCO>
-#include <Nepomuk/Vocabulary/NIE>
-#include <Nepomuk/Vocabulary/NFO>
-#include <Nepomuk/Vocabulary/PIMO>
-#include <nepomuk/utils.h>
-
-using namespace Nepomuk::Vocabulary;
-#endif
-
 ComicSaver::ComicSaver(SavingDir *savingDir)
   : mSavingDir(savingDir)
-{
-#ifdef HAVE_NEPOMUK
-    static bool isInit = false;
-    if (!isInit) {
-        isInit = true;
-        // for manually saving the comics
-        Nepomuk::ResourceManager::instance()->init();
-    }
-#endif
-}
+{}
 
 bool ComicSaver::save(const ComicData &comic)
 {
@@ -78,7 +55,7 @@ bool ComicSaver::save(const ComicData &comic)
 
    mSavingDir->setDir(destUrl.directory());
 
-#ifdef HAVE_NEPOMUK
+#if 0
     bool worked = KIO::NetAccess::file_copy(srcUrl, destUrl);
     //store additional data using Nepomuk
     if (worked) {

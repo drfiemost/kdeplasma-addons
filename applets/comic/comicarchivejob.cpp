@@ -24,17 +24,6 @@
 #include <KTemporaryFile>
 #include <KZip>
 
-#ifdef HAVE_NEPOMUK
-#include <Nepomuk/Resource>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
-#include <Nepomuk/Vocabulary/NCO>
-#include <Nepomuk/Vocabulary/NFO>
-#include <Nepomuk/Vocabulary/PIMO>
-
-using namespace Nepomuk::Vocabulary;
-#endif
-
 ComicArchiveJob::ComicArchiveJob( const KUrl &dest, Plasma::DataEngine *engine, ComicArchiveJob::ArchiveType archiveType, IdentifierType identifierType, const QString &pluginName, QObject *parent )
   : KJob( parent ),
     mType( archiveType ),
@@ -394,7 +383,7 @@ void ComicArchiveJob::copyZipFileToDestination()
         return;
     }
 
-#ifdef HAVE_NEPOMUK
+#if 0
     //store additional data using Nepomuk
     Nepomuk::Resource res( mDest, NFO::FileDataObject() );
 
