@@ -4,6 +4,7 @@ include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}
    ${CMAKE_CURRENT_BINARY_DIR}
    ${KDE4_INCLUDES}
+   ${QT_QTWEBKIT_INCLUDE_DIR}
    )
 
 set(rememberthemilk-plasmoid_SRCS 
@@ -21,7 +22,7 @@ target_link_libraries(plasma_applet_rtm
                       ${KDE4_PLASMA_LIBS}
                       ${KDE4_SOLID_LIBS}
                       ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KDEWEBKIT_LIBS}
+                      ${QT_QTWEBKIT_LIBRARY}
                      )
  
 install(TARGETS plasma_applet_rtm

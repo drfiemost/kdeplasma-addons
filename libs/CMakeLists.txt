@@ -1,6 +1,8 @@
 
 add_subdirectory(plasmaweather)
-add_subdirectory(rtm)
+if(QT_QTWEBKIT_FOUND)
+  add_subdirectory(rtm)
+endif(QT_QTWEBKIT_FOUND)
 
 if(${KDE_PLATFORM_PROFILE} STREQUAL "Desktop")
     add_subdirectory(lancelot)

@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
  
-#include <KWebView>
+#include <QWebView>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QWidget>
@@ -27,7 +27,7 @@ class LoginWidget: public QWidget
   public:
     LoginWidget(QObject *parent = 0)
     {
-      webview = new KWebView(this);
+      webview = new QWebView(this);
       button = new QPushButton("Press after authenticating", this);
       
       QVBoxLayout *layout = new QVBoxLayout(this);
@@ -41,7 +41,7 @@ class LoginWidget: public QWidget
     }
 
   private:
-    KWebView *webview;
+    QWebView *webview;
     QPushButton *button;
 };
 

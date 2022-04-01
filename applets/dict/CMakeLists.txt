@@ -1,8 +1,5 @@
 project(plasma-dict)
 
-INCLUDE_DIRECTORIES(
-	${QT_QTWEBKIT_INCLUDE_DIR})
-
 set(dict_SRCS
     dict.cpp)
 
