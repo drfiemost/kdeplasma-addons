@@ -97,4 +97,6 @@ if (Q_WS_X11)
    endif (X11_Xrender_FOUND)
 endif (Q_WS_X11)
 
-add_subdirectory(webslice)
+if(QT_QTWEBKIT_FOUND)
+  add_subdirectory(webslice)
+endif(QT_QTWEBKIT_FOUND)
