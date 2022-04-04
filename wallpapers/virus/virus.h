@@ -41,7 +41,9 @@ class Virus : public Plasma::Wallpaper
         void settingsChanged(bool);
     protected slots:
         void positioningChanged(int index);
+#ifdef ENABLE_KNEWSTUFF3
         void getNewWallpaper();
+#endif
         void colorChanged(const QColor& color);
         void pictureChanged(QModelIndex index);
         void browse();

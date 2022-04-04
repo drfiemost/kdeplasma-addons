@@ -65,7 +65,6 @@ public slots:
     void save(KConfigGroup & config);
 
 protected slots:
-    void getNewWallpaper();
     void colorChanged(const QColor& color);
     void pictureChanged(int index);
     void conditionChanged(int index);
@@ -78,7 +77,10 @@ protected slots:
     void configWidgetDestroyed();
     void advancedDialogDestroyed();
     void locationReady(const QString &source);
+#ifdef ENABLE_KNEWSTUFF3 
+    void getNewWallpaper();
     void newStuffFinished();
+#endif
 
 protected:
     void init(const KConfigGroup & config);

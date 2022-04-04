@@ -18,7 +18,9 @@
 #include <KDebug>
 #include <KDirWatch>
 #include <KFileDialog>
+#ifdef ENABLE_KNEWSTUFF3
 #include <KNS3/DownloadDialog>
+#endif
 #include <KStandardDirs>
 
 #include <Plasma/Theme>
@@ -265,7 +267,7 @@ void Virus::setSingleImage()
         renderWallpaper(img);
     }
 }
-
+#ifdef ENABLE_KNEWSTUFF3
 void Virus::getNewWallpaper()
 {
     KNS3::DownloadDialog dialog("virus_wallpaper.knsrc", m_configWidget);
@@ -274,7 +276,7 @@ void Virus::getNewWallpaper()
         m_model->reload();
     }
 }
-
+#endif
 void Virus::colorChanged(const QColor& color)
 {
     m_color = color;

@@ -37,8 +37,9 @@
 #include <Plasma/Theme>
 #include <Plasma/Service>
 #include <Plasma/ServiceJob>
+#ifdef ENABLE_KNEWSTUFF3
 #include <KNS3/DownloadDialog>
-
+#endif
 #include <QApplication>
 #include <QClipboard>
 #include <QGraphicsLinearLayout>
@@ -430,7 +431,7 @@ void Pastebin::animationUpdate(qreal progress)
     m_alpha = progress;
     update();
 }
-
+#ifdef ENABLE_KNEWSTUFF3
 void Pastebin::getNewStuff()
 {
     if (!m_newStuffDialog) {
@@ -454,7 +455,7 @@ void Pastebin::newStuffFinished()
         uiConfig.imageServer->setCurrentItem(cg.readEntry("ImageProvider", ""));
     }
 }
-
+#endif
 void Pastebin::refreshConfigDialog()
 {
     // setup text

@@ -27,8 +27,9 @@
 
 #include <QtGui/QWidget>
 #include <QTime>
-
+#ifdef ENABLE_KNEWSTUFF3
 #include <KNS3/Entry>
+#endif
 #include <Plasma/DataEngine>
 
 class ComicModel;
@@ -36,12 +37,12 @@ class KConfigDialog;
 class QCheckBox;
 class QComboBox;
 class QSortFilterProxyModel;
-
+#ifdef ENABLE_KNEWSTUFF3
 namespace KNS3 {
     class DownloadDialog;
     class DownloadManager;
 }
-
+#endif
 namespace Plasma {
     class DataEngine;
 }
@@ -67,14 +68,20 @@ class ComicUpdater : public QObject
           * Will check if an update is needed, if so will search
           * for updates and do them automatically
           */
+#ifdef ENABLE_KNEWSTUFF3
         void checkForUpdate();
         void slotUpdatesFound( const KNS3::Entry::List &entries );
+#endif
 
     private:
+#ifdef ENABLE_KNEWSTUFF3
         KNS3::DownloadManager *downloadManager();
+#endif
 
     private:
+#ifdef ENABLE_KNEWSTUFF3
         KNS3::DownloadManager *mDownloadManager;
+#endif
         KConfigGroup mGroup;
         int mUpdateIntervall;
         QDateTime mLastUpdate;
@@ -124,7 +131,9 @@ class ConfigWidget : public QWidget
          void dataUpdated( const QString &name, const Plasma::DataEngine::Data &data );
 
     protected slots:
+#ifdef ENABLE_KNEWSTUFF3
         void getNewStuff();
+#endif
 
     private:
         Ui::ComicSettings comicUi;
@@ -133,7 +142,9 @@ class ConfigWidget : public QWidget
         Plasma::DataEngine *mEngine;
         ComicModel *mModel;
         QSortFilterProxyModel *mProxyModel;
+#ifdef ENABLE_KNEWSTUFF3
         KNS3::DownloadDialog* mNewStuffDialog;
+#endif
 };
 
 #endif

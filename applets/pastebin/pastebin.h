@@ -119,8 +119,10 @@ private slots:
     void resetActionState();
     void copyToClipboard(const QString &url);
     void postingFinished(KJob *job);
+#ifdef ENABLE_KNEWSTUFF3
     void getNewStuff();
     void newStuffFinished();
+#endif
     void refreshConfigDialog();
 
 private:

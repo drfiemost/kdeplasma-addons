@@ -25,12 +25,16 @@
 #include <QtGui/QSortFilterProxyModel>
 
 #include <KConfigDialog>
+#ifdef ENABLE_KNEWSTUFF3
 #include <KNS3/DownloadDialog>
 #include <knewstuff3/downloadmanager.h>
+#endif
 
 ComicUpdater::ComicUpdater( QObject *parent )
   : QObject( parent ),
+#ifdef ENABLE_KNEWSTUFF3
     mDownloadManager( 0 ),
+#endif
     mUpdateIntervall( 3 ),
     m_updateTimer( 0 )
 {
@@ -48,11 +52,13 @@ void ComicUpdater::init(const KConfigGroup &group)
 void ComicUpdater::load()
 {
     //check when the last update happened and update if necessary
+#ifdef ENABLE_KNEWSTUFF3
     mUpdateIntervall = mGroup.readEntry( "updateIntervall", 3 );
     if ( mUpdateIntervall ) {
         mLastUpdate = mGroup.readEntry( "lastUpdate", QDateTime() );
         checkForUpdate();
     }
+#endif
 }
 
 void ComicUpdater::save()
@@ -64,7 +70,7 @@ void ComicUpdater::applyConfig( ConfigWidget *widget )
 {
     mUpdateIntervall = widget->updateIntervall();
 }
-
+#ifdef ENABLE_KNEWSTUFF3
 void ComicUpdater::checkForUpdate()
 {
     //start a timer to check each hour, if KNS3 should look for updates
@@ -96,10 +102,13 @@ KNS3::DownloadManager *ComicUpdater::downloadManager()
 
     return mDownloadManager;
 }
-
+#endif
 
 ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, QSortFilterProxyModel *proxy, KConfigDialog *parent )
-    : QWidget( parent ), mEngine( engine ), mModel( model ), mProxyModel( proxy ), mNewStuffDialog( 0 )
+    : QWidget( parent ), mEngine( engine ), mModel( model ), mProxyModel( proxy )
+#ifdef ENABLE_KNEWSTUFF3
+	, mNewStuffDialog( 0 )
+#endif
 {
     comicSettings = new QWidget( this );
     comicUi.setupUi( comicSettings );
@@ -138,7 +147,7 @@ ConfigWidget::~ConfigWidget()
 {
     mEngine->disconnectSource( QLatin1String( "providers" ), this );
 }
-
+#ifdef ENABLE_KNEWSTUFF3
 void ConfigWidget::getNewStuff()
 {
     if (!mNewStuffDialog) {
@@ -146,7 +155,7 @@ void ConfigWidget::getNewStuff()
     }
     mNewStuffDialog->show();
 }
-
+#endif
 void ConfigWidget::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(name);
