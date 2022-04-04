@@ -8,8 +8,12 @@ if(LIBATTICA_FOUND)
   add_subdirectory(ocs)
 endif(LIBATTICA_FOUND)
 
+if(QT_QTWEBKIT_FOUND)
+  add_subdirectory(rememberthemilk)
+endif(QT_QTWEBKIT_FOUND)
+
+
 add_subdirectory(potd)
-add_subdirectory(rememberthemilk)
 add_subdirectory(kdeobservatory)
 add_subdirectory(kimpanel)
 add_subdirectory(konsoleprofiles)
