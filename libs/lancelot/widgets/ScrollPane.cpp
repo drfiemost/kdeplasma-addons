@@ -320,7 +320,7 @@ void ScrollPane::setFlip(Plasma::Flip flip) //>
 void ScrollPane::scrollTo(QRectF rect) //>
 {
     QSizeF viewportSize = currentViewportSize();
-    QSizeF scrollableSize = d->widget->sizeFor(viewportSize);
+    //QSizeF scrollableSize = d->widget->sizeFor(viewportSize);
 
     // Vertical scroll
     // TODO: It would be prettier to do this differently
