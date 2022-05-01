@@ -300,7 +300,8 @@ void ComicProviderWrapper::init()
         if ( mPackage->isValid() ) {
             // package->filePath( "mainscript" ) returns empty if it does not exist
             // We want to test extensions supported by kross with mainscript
-            const QString mainscript = mPackage->path() + mPackage->structure()->contentsPrefix() +
+            const QStringList prefixes = mPackage->structure()->contentsPrefixPaths();
+            const QString mainscript = mPackage->path() + prefixes.first() +
                                        mPackage->structure()->path( "mainscript" );
 
             QFileInfo info( mainscript );
