@@ -57,7 +57,10 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
       m_signalMapper(new QSignalMapper()), m_paste(0),
       m_topSeparator(0), m_bottomSeparator(0),
-      m_historySize(3), m_newStuffDialog(0)
+      m_historySize(3)
+#ifdef ENABLE_KNEWSTUFF3
+      , m_newStuffDialog(0)
+#endif
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
@@ -100,8 +103,9 @@ Pastebin::~Pastebin()
 {
     delete m_topSeparator;
     delete m_bottomSeparator;
+#ifdef ENABLE_KNEWSTUFF3
     delete m_newStuffDialog;
-
+#endif
     saveHistory();
     const int numberOfActionHistory = m_actionHistory.size();
     for (int i = 0; i < numberOfActionHistory; ++i) {

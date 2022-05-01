@@ -174,8 +174,9 @@ private:
     Plasma::DataEngine *m_engine;
     Plasma::Service *m_postingService;
     Ui::pastebinConfig uiConfig;
+#ifdef ENABLE_KNEWSTUFF3
     KNS3::DownloadDialog* m_newStuffDialog;
-
+#endif
     QClipboard::Mode lastMode;
 };
 
