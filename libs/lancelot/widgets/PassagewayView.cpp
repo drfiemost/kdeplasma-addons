@@ -588,7 +588,7 @@ void PassagewayView::keyPressEvent(QKeyEvent * event)
     }
 }
 
-void PassagewayView::hideEvent(QHideEvent * event)
+void PassagewayView::hideEvent(QHideEvent *)
 {
     if (d->popup) {
         d->popup->hide();

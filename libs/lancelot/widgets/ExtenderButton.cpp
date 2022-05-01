@@ -104,7 +104,7 @@ public:
         }
     }
 
-    L_Override void showEvent(QShowEvent * event)
+    L_Override void showEvent(QShowEvent *)
     {
         frame = 0;
     }
