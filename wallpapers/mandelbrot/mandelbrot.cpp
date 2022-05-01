@@ -33,7 +33,7 @@ const qreal MOUSE_WHEEL_SPEED = (qreal)0.002;
 K_EXPORT_PLASMA_WALLPAPER(mandelbrot, Mandelbrot)
 
 Mandelbrot::Mandelbrot(QObject *parent, const QVariantList &args)
-    : Plasma::Wallpaper(parent, args), m_image(0), m_tiling(this),
+    : Plasma::Wallpaper(parent, args), m_image(nullptr), m_tiling(this),
       m_exportImageAction(i18n("Export Mandelbrot image..."), this),
       m_exportConfigAction(i18n("Export Mandelbrot parameters..."), this),
       m_importConfigAction(i18n("Import Mandelbrot parameters..."), this),
@@ -287,7 +287,9 @@ void Mandelbrot::loadFromCacheOrStartRendering()
     {
         if(m_image->size() == boundingRect().size()) {
             //kDebug() << "image " << k << " found in cache and has the wanted size";
-            m_image->convertToFormat(MANDELBROT_QIMAGE_FORMAT);
+            QImage image = m_image->convertToFormat(MANDELBROT_QIMAGE_FORMAT);
+            delete m_image;
+            m_image = new QImage(image);
             m_cacheKey = k;
             m_imageIsReady = true;
             update(m_image->rect());
