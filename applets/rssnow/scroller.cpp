@@ -218,14 +218,14 @@ void Scroller::doAnimation(QAbstractAnimation::Direction direction)
                 m_activeitemlist.append(item);
             }
             //acellerate while scrolling:
-            int frames, time, queuelength;
+            int queuelength;
             if (m_delayedNext > 0) {
                 queuelength = m_delayedNext + 1;
             } else {
                 queuelength = m_delayedPrev + 1;
             }
-            time = 400 / queuelength;
-            frames = time / 40;
+            int time = 400 / queuelength;
+            //int frames = time / 40;
 
             QPropertyAnimation *animation = m_animation.data();
             if (!animation) {
@@ -422,7 +422,7 @@ bool Scroller::animations() const
     return m_animations;
 }
 
-void Scroller::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
+void Scroller::dataUpdated([[maybe_unused]] const QString& source, const Plasma::DataEngine::Data &data)
 {
     if (!data.isEmpty()) {
         m_list.clear();

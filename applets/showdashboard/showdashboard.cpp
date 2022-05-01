@@ -89,7 +89,7 @@ void ShowDashboard::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
     event->accept();
 }
 
-void ShowDashboard::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
+void ShowDashboard::dragLeaveEvent(QGraphicsSceneDragDropEvent *)
 {
     m_timer.stop();
 }

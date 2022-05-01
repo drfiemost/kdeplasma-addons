@@ -467,7 +467,7 @@ void PreviewWidget::paint(QPainter *painter,
         layoutItems();
     }
 
-    const int bottomBorder = bottomBorderHeight();
+    //const int bottomBorder = bottomBorderHeight();
     QRect contentsRect = opt->rect;
 //    painter->translate(contentsRect.topLeft());
     painter->setRenderHint(QPainter::Antialiasing);
