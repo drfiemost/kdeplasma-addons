@@ -536,6 +536,7 @@ bool ToolTipManager::eventFilter(QObject *watched, QEvent *event)
                 break;
             }
         }
+        [[fallthrough]];
 
     case QEvent::GraphicsSceneHoverEnter: {
         // Check that there is a tooltip to show
