@@ -29,7 +29,7 @@
 #include <qdir.h>
 #include <kdeclarative.h>
 
-Q_DECLARE_METATYPE(Plasma::Package*);
+Q_DECLARE_METATYPE(Plasma::Package*)
 
 WallpapersModel::WallpapersModel(QObject* parent)
     : QAbstractListModel(parent)
