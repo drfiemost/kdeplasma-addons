@@ -299,6 +299,9 @@ void ToolTipContent::registerResources(QTextDocument *document) const
         case CssResource:
             t = QTextDocument::StyleSheetResource;
             break;
+        default:
+            // just to silence maybe-uninitialized warning
+            t = QTextDocument::UserResource;
         }
 
         document->addResource(t, it.key(), r.data);
