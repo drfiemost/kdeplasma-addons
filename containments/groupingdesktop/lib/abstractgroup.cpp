@@ -739,7 +739,7 @@ QVariant AbstractGroup::itemChange(GraphicsItemChange change, const QVariant &va
     switch (change) {
         case ItemPositionHasChanged:
             emit geometryChanged();
-
+            [[fallthrough]];
         case ItemTransformHasChanged: {
             // invalid group, will result in save using the default group
             KConfigGroup cg;
