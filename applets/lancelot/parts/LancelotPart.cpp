@@ -56,7 +56,7 @@ public:
         update();
     }
 
-    void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
+    void paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget * = nullptr)
     {
         const int radius = 2;
 

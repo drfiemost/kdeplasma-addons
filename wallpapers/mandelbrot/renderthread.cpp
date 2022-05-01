@@ -30,7 +30,7 @@ void MandelbrotRenderThread::run()
     {
         MandelbrotTile tile;
         if(!m_mandelbrot->tiling().next(&tile)) return;
-        QRect destination = tile.destination();
+        //QRect destination = tile.destination();
 
         // this is on purpose slightly larger than machine epsilon for float (gave artifacts near the transition point)
         const qreal double_precision_threshold = (qreal)4.0e-07;
