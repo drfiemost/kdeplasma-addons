@@ -269,6 +269,10 @@ void LancelotApplet::iconSizeChanged(int group)
             case Plasma::Vertical:
                 iconSize = IconSize(KIconLoader::Panel);
                 break;
+
+            default:
+                // silence warnings
+                iconSize = 0;
         }
 
         foreach (Lancelot::HoverIcon * icon, d->buttons) {

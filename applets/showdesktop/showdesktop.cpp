@@ -132,6 +132,10 @@ QSizeF ShowDesktop::sizeHint(Qt::SizeHint which, const QSizeF & constraint) cons
             case Plasma::Vertical:
                 iconSize = IconSize(KIconLoader::Panel);
                 break;
+
+            default:
+                // silence warnings
+                iconSize = 0;
         }
 
         return QSizeF(iconSize, iconSize);

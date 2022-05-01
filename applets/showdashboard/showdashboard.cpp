@@ -109,6 +109,10 @@ QSizeF ShowDashboard::sizeHint(Qt::SizeHint which, const QSizeF & constraint) co
             case Plasma::Vertical:
                 iconSize = IconSize(KIconLoader::Panel);
                 break;
+
+            default:
+                // silence warnings
+                iconSize = 0;
         }
 
         return QSizeF(iconSize, iconSize);
