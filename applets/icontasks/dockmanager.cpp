@@ -331,7 +331,7 @@ QDBusObjectPath DockManager::GetItemByXid(qlonglong xid)
     for (; it != end; ++it) {
         if (TaskManager::TaskItemType == it.key()->abstractItem()->itemType()) {
             WindowTaskItem *item = static_cast<WindowTaskItem *>(it.key());
-            if (item->windowTask() && item->windowTask()->window() == xid) {
+            if (item->windowTask() && item->windowTask()->window() == static_cast<WId>(xid)) {
                 if (m_items.contains(it.value())) {
                     return QDBusObjectPath(m_items[it.value()]->path());
                 }
