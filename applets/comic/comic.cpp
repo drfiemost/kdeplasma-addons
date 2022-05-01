@@ -462,7 +462,7 @@ void ComicApplet::slotCurrentDay()
     updateComic(QString());
 }
 
-void ComicApplet::slotFoundLastStrip( int index, const QString &identifier, const QString &suffix )
+void ComicApplet::slotFoundLastStrip( int, const QString &identifier, const QString &suffix )
 {
     KConfigGroup cg = config();
     if ( suffix != cg.readEntry( "lastStrip_" + identifier, QString() ) ) {
