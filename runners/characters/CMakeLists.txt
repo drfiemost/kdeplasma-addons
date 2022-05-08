@@ -10,8 +10,8 @@ target_link_libraries(kcm_krunner_charrunner
     ${KDE4_KDECORE_LIBS}
     ${KDE4_KDEUI_LIBS}
     ${KDE4_KCMUTILS_LIBS} 
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
+    Qt4::QtCore
+    Qt4::QtGui
     )
 
 # Now make sure all files get to the right place

@@ -31,7 +31,7 @@ set( potd_flickr_provider_SRCS
 )
 
 kde4_add_plugin( plasma_potd_flickrprovider ${potd_flickr_provider_SRCS} )
-target_link_libraries( plasma_potd_flickrprovider plasmapotdprovidercore ${KDE4_KIO_LIBS}  ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY})
+target_link_libraries( plasma_potd_flickrprovider plasmapotdprovidercore ${KDE4_KIO_LIBS}  ${KDE4_KDECORE_LIBS} Qt4::QtGui)
 install( TARGETS plasma_potd_flickrprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES flickrprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 
@@ -41,7 +41,7 @@ set( potd_apod_provider_SRCS
 )
 
 kde4_add_plugin( plasma_potd_apodprovider ${potd_apod_provider_SRCS} )
-target_link_libraries( plasma_potd_apodprovider plasmapotdprovidercore ${KDE4_KIO_LIBS} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBS})
+target_link_libraries( plasma_potd_apodprovider plasmapotdprovidercore ${KDE4_KIO_LIBS} Qt4::QtGui ${KDE4_KDECORE_LIBS})
 install( TARGETS plasma_potd_apodprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES apodprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 
@@ -51,7 +51,7 @@ if(QT_QTWEBKIT_FOUND)
     )
 
     kde4_add_plugin( plasma_potd_natgeoprovider ${potd_natgeo_provider_SRCS} )
-    target_link_libraries( plasma_potd_natgeoprovider plasmapotdprovidercore ${KDE4_KIO_LIBS} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDE4_KDEWEBKIT_LIBRARY})
+    target_link_libraries( plasma_potd_natgeoprovider plasmapotdprovidercore ${KDE4_KIO_LIBS} Qt4::QtGui ${KDE4_KDECORE_LIBS} ${KDE4_KDEWEBKIT_LIBRARY})
     install( TARGETS plasma_potd_natgeoprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
     install( FILES natgeoprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 endif(QT_QTWEBKIT_FOUND)
@@ -61,7 +61,7 @@ set( potd_epod_provider_SRCS
 )
 
 kde4_add_plugin( plasma_potd_epodprovider ${potd_epod_provider_SRCS} )
-target_link_libraries( plasma_potd_epodprovider plasmapotdprovidercore ${KDE4_KIO_LIBS} ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY})
+target_link_libraries( plasma_potd_epodprovider plasmapotdprovidercore ${KDE4_KIO_LIBS} ${KDE4_KDECORE_LIBS} Qt4::QtGui)
 install( TARGETS plasma_potd_epodprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES epodprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 
@@ -71,7 +71,7 @@ set( potd_osei_provider_SRCS
 )
 
 kde4_add_plugin( plasma_potd_oseiprovider ${potd_osei_provider_SRCS} )
-target_link_libraries( plasma_potd_oseiprovider plasmapotdprovidercore ${KDE4_KIO_LIBS} ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} )
+target_link_libraries( plasma_potd_oseiprovider plasmapotdprovidercore ${KDE4_KIO_LIBS} ${KDE4_KDECORE_LIBS} Qt4::QtGui )
 install( TARGETS plasma_potd_oseiprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES oseiprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 
@@ -81,6 +81,6 @@ set( potd_wcpotd_provider_SRCS
 )
 
 kde4_add_plugin( plasma_potd_wcpotdprovider ${potd_wcpotd_provider_SRCS} )
-target_link_libraries( plasma_potd_wcpotdprovider plasmapotdprovidercore ${KDE4_KIO_LIBS} ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} )
+target_link_libraries( plasma_potd_wcpotdprovider plasmapotdprovidercore ${KDE4_KIO_LIBS} ${KDE4_KDECORE_LIBS} Qt4::QtGui )
 install( TARGETS plasma_potd_wcpotdprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES wcpotdprovider.desktop DESTINATION ${SERVICES_INSTALL_DIR} )

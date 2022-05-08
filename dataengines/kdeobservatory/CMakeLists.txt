@@ -20,7 +20,7 @@ set(kdeobservatory_engine_SRCS
 kde4_add_plugin(plasma_engine_kdeobservatory ${kdeobservatory_engine_SRCS})
 
 target_link_libraries(plasma_engine_kdeobservatory
-                      ${QT_QTNETWORK_LIBRARY}
+                      Qt4::QtNetwork
                       ${KDE4_KDECORE_LIBS}
                       ${KDE4_KIO_LIBS}
                       ${KDE4_SOLID_LIBS}

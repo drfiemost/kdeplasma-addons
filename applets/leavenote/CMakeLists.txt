@@ -9,7 +9,7 @@ kde4_add_ui_files(leavenote_SRCS widget.ui)
 kde4_add_plugin(plasma_applet_leavenote ${leavenote_SRCS})
 
 target_link_libraries(plasma_applet_leavenote
-                      ${QT_QTNETWORK_LIBRARY} ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS})
+                     Qt4::QtNetwork ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS})
 
 install(TARGETS plasma_applet_leavenote
         DESTINATION ${PLUGIN_INSTALL_DIR})

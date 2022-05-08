@@ -23,7 +23,7 @@ QT4_ADD_DBUS_ADAPTOR(mediaplayer_SRCS org.kde.PlasmaMediaPlayer.xml
 kde4_add_plugin(plasma_applet_mediaplayer ${mediaplayer_SRCS})
 target_link_libraries(plasma_applet_mediaplayer 
                       ${KDE4_PHONON_LIBS}
-                      ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${QT_QTDBUS_LIBRARY})
+                      ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} Qt4::QtDBus)
 
 
 

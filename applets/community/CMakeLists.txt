@@ -33,7 +33,7 @@ target_link_libraries(
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
     ${KDE4_KCMUTILS_LIBS}
-    ${QT_QTWEBKIT_LIBRARY}
+    Qt4::QtWebKit4
 )
 
 install(TARGETS plasma_applet_opendesktop DESTINATION ${PLUGIN_INSTALL_DIR})

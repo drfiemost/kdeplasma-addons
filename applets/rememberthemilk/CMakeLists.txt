@@ -22,7 +22,7 @@ target_link_libraries(plasma_applet_rtm
                       ${KDE4_PLASMA_LIBS}
                       ${KDE4_SOLID_LIBS}
                       ${KDE4_KDEUI_LIBS}
-                      ${QT_QTWEBKIT_LIBRARY}
+                      Qt4::QtWebKit
                      )
  
 install(TARGETS plasma_applet_rtm

@@ -29,7 +29,7 @@ kde4_add_plugin(plasma_engine_rtm ${rtm_engine_SRCS})
 target_link_libraries(plasma_engine_rtm
                       ${KDE4_KDECORE_LIBS}
                       ${KDE4_PLASMA_LIBS}
-		      ${QT_QTNETWORK_LIBRARY}
+		      Qt4::QtNetwork
 		      ${RTM_LIBRARY})
  
 install(TARGETS plasma_engine_rtm

@@ -1,6 +1,5 @@
 
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES}
-${QT_QTNETWORK_INCLUDES} ${QT_QTXML_INCLUDES} ${QCA2_INCLUDE_DIR}
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES} ${QCA2_INCLUDE_DIR}
 ${QJSON_INCLUDE_DIR})
 
 set(twitter_engine_SRCS
@@ -20,10 +19,10 @@ target_link_libraries(plasma_engine_microblog
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
     #${QT_QTXML_LIBS}
-    ${QT_QTNETWORK_LIBS}
+    Qt4::QtNetwork
     ${QCA2_LIBRARIES}
     ${QJSON_LIBRARIES}
-    ${QT_QTWEBKIT_LIBRARY}
+    Qt4::QtWebKit
     #${KDE4_KDEUI_LIBS}
     ${KDE4_KDEWEBKIT_LIBRARY}
 )

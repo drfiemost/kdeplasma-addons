@@ -10,7 +10,7 @@ target_link_libraries(plasma_applet_weather
     ${KDE4_KDEUI_LIBS}
     plasmaweather
     ${KDE4WORKSPACE_WEATHERION_LIBRARY}
-    ${QT_QTDECLARATIVE_LIBRARY}
+    Qt4::QtDeclarative
     ${KDE4_KUNITCONVERSION_LIBS})
 
 install(TARGETS plasma_applet_weather DESTINATION ${PLUGIN_INSTALL_DIR})

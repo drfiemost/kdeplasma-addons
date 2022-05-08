@@ -16,7 +16,7 @@ kde4_add_plugin(plasma_applet_previewer ${previewer_SRCS} ${Previewer_SRCS})
 
 
 target_link_libraries(plasma_applet_previewer
-                      ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KIO_LIBS} ${QT_QTDBUS_LIBRARY})
+                      ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KIO_LIBS} Qt4::QtDBus)
  
 
 install(TARGETS plasma_applet_previewer

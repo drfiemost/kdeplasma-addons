@@ -35,7 +35,7 @@ set( plasma_comic_krossprovider_SRCS
 )
 
 kde4_add_plugin( plasma_comic_krossprovider ${plasma_comic_krossprovider_SRCS} )
-target_link_libraries( plasma_comic_krossprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${KDE4_KIO_LIBS} ${KDE4_KROSSCORE_LIBS} ${KDE4_PLASMA_LIBS} )
+target_link_libraries( plasma_comic_krossprovider plasmacomicprovidercore ${KDE4_KDECORE_LIBS} Qt4::QtGui ${KDE4_KIO_LIBS} ${KDE4_KROSSCORE_LIBS} ${KDE4_PLASMA_LIBS} )
 install( TARGETS plasma_comic_krossprovider DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 set(comicpackage_SRCS

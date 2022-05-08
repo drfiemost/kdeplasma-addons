@@ -21,12 +21,10 @@ set( rtm_LIB_SRCS
         xmlreaders.cpp
     )
 
-INCLUDE_DIRECTORIES(${QT_QTWEBKIT_INCLUDE_DIR})
-
 kde4_add_library(rtm SHARED ${rtm_LIB_SRCS})
 set_target_properties(rtm PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
-target_link_libraries(rtm ${QT_QTCORE_LIBRARY}
-                          ${QT_QTNETWORK_LIBRARY}
+target_link_libraries(rtm Qt4::QtCore
+                          Qt4::QtNetwork
                           ${KDE4_KDECORE_LIBS}
 			  ${KDE4_SOLID_LIBS})
 

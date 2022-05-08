@@ -4,7 +4,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../)
 kde4_add_executable(rtmlogin login.cpp)
 target_link_libraries(rtmlogin
                       ${KDE4_KDEUI_LIBS}
-                      ${QT_QTWEBKIT_LIBRARY}
+                      Qt4::QtWebKit
                       rtm)
 
 #kde4_add_executable(rtmrefresh refresh.cpp)

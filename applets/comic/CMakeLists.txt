@@ -23,7 +23,7 @@ kde4_add_ui_files(comic_SRCS
 
 kde4_add_plugin(plasma_applet_comic ${comic_SRCS})
 
-target_link_libraries(plasma_applet_comic ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS} ${KDE4_SOLID_LIBS} ${KDE4_KIO_LIBS} ${QT_QTDECLARATIVE_LIBRARY})
+target_link_libraries(plasma_applet_comic ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS} ${KDE4_SOLID_LIBS} ${KDE4_KIO_LIBS} Qt4::QtDeclarative)
 if(LIBATTICA_FOUND)
   add_definitions(-DENABLE_KNEWSTUFF3)
   target_link_libraries(plasma_applet_comic ${KDE4_KNEWSTUFF3_LIBS})

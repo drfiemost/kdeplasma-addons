@@ -13,8 +13,8 @@ target_link_libraries(kcm_krunner_audioplayercontrol
     ${KDE4_KDECORE_LIBS}
     ${KDE4_KDEUI_LIBS}
     ${KDE4_KCMUTILS_LIBS}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
+    Qt4::QtCore
+    Qt4::QtGui
     )
 
 kde4_add_plugin(krunner_audioplayercontrol ${krunner_audioplayercontrol_SRCS})
