@@ -128,8 +128,7 @@ unsigned int keycodeToKeysym(const unsigned int &code, int level)
         refreshXkbState();
     }
 
-    int vector = xkbState.group * 2 + level;
-    return (unsigned int)XKeycodeToKeysym(QX11Info::display(), code, vector);
+    return (unsigned int)XkbKeycodeToKeysym(QX11Info::display(), code, xkbState.group, level);
 }
 
 unsigned int keysymToKeycode(const unsigned int &keysym)
