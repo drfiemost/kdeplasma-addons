@@ -37,9 +37,6 @@
 #include <Plasma/Theme>
 #include <Plasma/Service>
 #include <Plasma/ServiceJob>
-#ifdef ENABLE_KNEWSTUFF3
-#include <KNS3/DownloadDialog>
-#endif
 #include <QApplication>
 #include <QClipboard>
 #include <QGraphicsLinearLayout>
@@ -58,9 +55,6 @@ Pastebin::Pastebin(QObject *parent, const QVariantList &args)
       m_signalMapper(new QSignalMapper()), m_paste(0),
       m_topSeparator(0), m_bottomSeparator(0),
       m_historySize(3)
-#ifdef ENABLE_KNEWSTUFF3
-      , m_newStuffDialog(0)
-#endif
 {
     setAcceptDrops(true);
     setHasConfigurationInterface(true);
@@ -103,9 +97,7 @@ Pastebin::~Pastebin()
 {
     delete m_topSeparator;
     delete m_bottomSeparator;
-#ifdef ENABLE_KNEWSTUFF3
-    delete m_newStuffDialog;
-#endif
+
     saveHistory();
     const int numberOfActionHistory = m_actionHistory.size();
     for (int i = 0; i < numberOfActionHistory; ++i) {
@@ -435,31 +427,7 @@ void Pastebin::animationUpdate(qreal progress)
     m_alpha = progress;
     update();
 }
-#ifdef ENABLE_KNEWSTUFF3
-void Pastebin::getNewStuff()
-{
-    if (!m_newStuffDialog) {
-        QString ghns("pastebin.knsrc");
-        m_newStuffDialog = new KNS3::DownloadDialog( ghns );
-        connect(m_newStuffDialog, SIGNAL(accepted()),
-                this, SLOT(newStuffFinished()));
-    }
-    m_newStuffDialog->show();
-}
 
-void Pastebin::newStuffFinished()
-{
-    if ( m_newStuffDialog->changedEntries().count() ) {
-        // refresh the options of config dialog
-        refreshConfigDialog();
-
-        // setup the config dialog to last options
-        KConfigGroup cg = config();
-        uiConfig.textServer->setCurrentItem(cg.readEntry("TextProvider", ""));
-        uiConfig.imageServer->setCurrentItem(cg.readEntry("ImageProvider", ""));
-    }
-}
-#endif
 void Pastebin::refreshConfigDialog()
 {
     // setup text

@@ -25,16 +25,9 @@
 #include <QtGui/QSortFilterProxyModel>
 
 #include <KConfigDialog>
-#ifdef ENABLE_KNEWSTUFF3
-#include <KNS3/DownloadDialog>
-#include <knewstuff3/downloadmanager.h>
-#endif
 
 ComicUpdater::ComicUpdater( QObject *parent )
   : QObject( parent ),
-#ifdef ENABLE_KNEWSTUFF3
-    mDownloadManager( 0 ),
-#endif
     mUpdateIntervall( 3 ),
     m_updateTimer( 0 )
 {
@@ -50,16 +43,7 @@ void ComicUpdater::init(const KConfigGroup &group)
 }
 
 void ComicUpdater::load()
-{
-    //check when the last update happened and update if necessary
-#ifdef ENABLE_KNEWSTUFF3
-    mUpdateIntervall = mGroup.readEntry( "updateIntervall", 3 );
-    if ( mUpdateIntervall ) {
-        mLastUpdate = mGroup.readEntry( "lastUpdate", QDateTime() );
-        checkForUpdate();
-    }
-#endif
-}
+{}
 
 void ComicUpdater::save()
 {
@@ -70,45 +54,8 @@ void ComicUpdater::applyConfig( ConfigWidget *widget )
 {
     mUpdateIntervall = widget->updateIntervall();
 }
-#ifdef ENABLE_KNEWSTUFF3
-void ComicUpdater::checkForUpdate()
-{
-    //start a timer to check each hour, if KNS3 should look for updates
-    if ( !m_updateTimer ) {
-        m_updateTimer = new QTimer(this);
-        connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
-        m_updateTimer->start( 1 * 60 * 60 * 1000 );
-    }
-
-    if ( !mLastUpdate.isValid() || ( mLastUpdate.addDays( mUpdateIntervall ) < QDateTime::currentDateTime() ) ) {
-        mGroup.writeEntry( "lastUpdate", QDateTime::currentDateTime() );
-        downloadManager()->checkForUpdates();
-    }
-}
-
-void ComicUpdater::slotUpdatesFound( const KNS3::Entry::List &entries )
-{
-    for ( int i = 0; i < entries.count(); ++i ) {
-        downloadManager()->installEntry( entries[ i ] );
-    }
-}
-
-KNS3::DownloadManager *ComicUpdater::downloadManager()
-{
-    if ( !mDownloadManager ) {
-        mDownloadManager = new KNS3::DownloadManager( "comic.knsrc", this );
-        connect(mDownloadManager, SIGNAL(searchResult(KNS3::Entry::List)), this, SLOT(slotUpdatesFound(KNS3::Entry::List)));
-    }
-
-    return mDownloadManager;
-}
-#endif
-
 ConfigWidget::ConfigWidget( Plasma::DataEngine *engine, ComicModel *model, QSortFilterProxyModel *proxy, KConfigDialog *parent )
     : QWidget( parent ), mEngine( engine ), mModel( model ), mProxyModel( proxy )
-#ifdef ENABLE_KNEWSTUFF3
-	, mNewStuffDialog( 0 )
-#endif
 {
     comicSettings = new QWidget( this );
     comicUi.setupUi( comicSettings );
@@ -147,15 +94,7 @@ ConfigWidget::~ConfigWidget()
 {
     mEngine->disconnectSource( QLatin1String( "providers" ), this );
 }
-#ifdef ENABLE_KNEWSTUFF3
-void ConfigWidget::getNewStuff()
-{
-    if (!mNewStuffDialog) {
-        mNewStuffDialog = new KNS3::DownloadDialog( "comic.knsrc", this );
-    }
-    mNewStuffDialog->show();
-}
-#endif
+
 void ConfigWidget::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(name);

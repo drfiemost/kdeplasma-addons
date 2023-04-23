@@ -29,9 +29,6 @@
 // KDE includes
 #include <KFileDialog>
 #include <KLocalizedString>
-#ifdef ENABLE_KNEWSTUFF3
-#include <KNS3/DownloadDialog>
-#endif
 #include <KPushButton>
 #include <KStandardDirs>
 #include <Plasma/Animator>
@@ -337,23 +334,7 @@ void WeatherWallpaper::showAdvancedDialog()
     connect(m_advancedDialog, SIGNAL(destroyed(QObject*)), this, SLOT(advancedDialogDestroyed()));
     m_advancedDialog->show();
 }
-#ifdef ENABLE_KNEWSTUFF3
-void WeatherWallpaper::getNewWallpaper()
-{
-    if (!m_newStuffDialog) {
-        m_newStuffDialog = new KNS3::DownloadDialog( QLatin1String( "wallpaper.knsrc" ), m_configWidget );
-        connect(m_newStuffDialog, SIGNAL(accepted()), SLOT(newStuffFinished()));
-    }
-    m_newStuffDialog->show();
-}
 
-void WeatherWallpaper::newStuffFinished()
-{
-    if (m_model && m_newStuffDialog->changedEntries().size() > 0) {
-        m_model->reload();
-    }
-}
-#endif
 void WeatherWallpaper::colorChanged(const QColor& color)
 {
     m_color = color;

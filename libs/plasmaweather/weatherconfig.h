@@ -129,11 +129,6 @@ public Q_SLOTS:
      **/
     void setUpdateInterval(int interval);
 
-protected Q_SLOTS:
-#ifdef ENABLE_KNEWSTUFF3
-    void getNewStuff();
-#endif
-
 private:
     class Private;
     Private * const d;

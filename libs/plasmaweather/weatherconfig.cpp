@@ -26,9 +26,6 @@
 #include <KPixmapSequence>
 #include <kpixmapsequencewidget.h>
 //#include <KPixmapSequenceWidget>
-#ifdef ENABLE_KNEWSTUFF3
-#include <KNS3/DownloadDialog>
-#endif
 #include <KUnitConversion/Converter>
 
 #include "weathervalidator.h"
@@ -165,14 +162,7 @@ WeatherConfig::~WeatherConfig()
 {
     delete d;
 }
-#ifdef ENABLE_KNEWSTUFF3
-void WeatherConfig::getNewStuff()
-{
-    KNS3::DownloadDialog dialog(QLatin1String( "kmediafactory.knsrc" ), this);
-    dialog.exec();
-    KNS3::Entry::List entries = dialog.changedEntries();
-}
-#endif
+
 void WeatherConfig::setDataEngine(Plasma::DataEngine* dataengine)
 {
     d->dataengine = dataengine;

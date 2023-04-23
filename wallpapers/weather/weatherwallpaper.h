@@ -77,10 +77,6 @@ protected slots:
     void configWidgetDestroyed();
     void advancedDialogDestroyed();
     void locationReady(const QString &source);
-#ifdef ENABLE_KNEWSTUFF3 
-    void getNewWallpaper();
-    void newStuffFinished();
-#endif
 
 protected:
     void init(const KConfigGroup & config);
