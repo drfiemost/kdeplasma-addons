@@ -48,12 +48,6 @@ add_subdirectory(eyes)
 add_subdirectory(unitconverter)
 add_subdirectory(weatherstation)
 
-
-if(QT_QTWEBKIT_FOUND)
-  add_subdirectory(news)
-  add_subdirectory(rememberthemilk)
-endif(QT_QTWEBKIT_FOUND)
-
 if(PHONON_FOUND)
   add_subdirectory(mediaplayer)
 endif(PHONON_FOUND)
@@ -91,7 +85,3 @@ if (Q_WS_X11)
       add_subdirectory(kimpanel)
    endif (X11_Xrender_FOUND)
 endif (Q_WS_X11)
-
-if(QT_QTWEBKIT_FOUND)
-  add_subdirectory(webslice)
-endif(QT_QTWEBKIT_FOUND)

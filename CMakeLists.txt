@@ -20,9 +20,6 @@ include(MacroOptionalDependPackage)
 macro_optional_find_package(KDE4Workspace)
 macro_log_feature(KDE4WORKSPACE_FOUND "kdebase workspace" "KDE base workspace libraries" "http://www.kde.org" FALSE "" "Needed for building several Plasma plugins")
 
-macro_optional_find_package(QCA2)
-macro_log_feature(QCA2_FOUND "QCA2" "Qt Cryptographic Architecture" "http://delta.affinix.com/qca" FALSE "2.0.0" "Needed for building microblog dataengine")
-
 macro_optional_find_package(KdepimLibs)
 macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "KDE PIM libraries" "http://www.kde.org" FALSE "" "Needed for building several Plasma plugins")
 find_package(Boost)
@@ -35,9 +32,6 @@ macro_log_feature(KDeclarative_FOUND "kdeclarative" "KDE Declarative (QML) suppo
 
 macro_optional_find_package(QJSON)
 macro_log_feature(QJSON_FOUND "QJSon" "Used for various Internet runners, for parsing API responses, and the microblog dataengine" "" FALSE "" "")
-
-macro_optional_find_package(QtOAuth)
-macro_log_feature(QTOAUTH_FOUND "QtOAuth" "QtOAuth Library - required to build the Plasma Microblog DataEngine" "https://github.com/ayoy/qoauth" FALSE "" "Needed for building Plasma Microblog DataEngine")
 
 macro_optional_depend_package(Marble "Marble")
 if (DEPEND_PACKAGE_Marble)
