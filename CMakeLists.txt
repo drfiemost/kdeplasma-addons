@@ -31,7 +31,7 @@ macro_optional_find_package(KDeclarative)
 macro_log_feature(KDeclarative_FOUND "kdeclarative" "KDE Declarative (QML) support from kdelibs" "http://www.kde.org" FALSE "" "Required by qmlwallpapers")
 
 macro_optional_find_package(QJSON)
-macro_log_feature(QJSON_FOUND "QJSon" "Used for various Internet runners, for parsing API responses, and the microblog dataengine" "" FALSE "" "")
+macro_log_feature(QJSON_FOUND "QJSon" "Used for various Internet runners, for parsing API responses, and the microblog dataengine" "http://qjson.sourceforge.net/" FALSE "" "")
 
 macro_optional_depend_package(Marble "Marble")
 if (DEPEND_PACKAGE_Marble)
