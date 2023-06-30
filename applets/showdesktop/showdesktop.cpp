@@ -99,7 +99,7 @@ void ShowDesktop::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
     event->accept();
 }
 
-void ShowDesktop::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
+void ShowDesktop::dragLeaveEvent([[maybe_unused]] QGraphicsSceneDragDropEvent *event)
 {
     m_timer.stop();
 }

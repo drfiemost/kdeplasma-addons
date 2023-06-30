@@ -105,7 +105,7 @@ void MediaPlayer::init()
 
 
 
-void MediaPlayer::constraintsEvent(Plasma::Constraints constraints)
+void MediaPlayer::constraintsEvent([[maybe_unused]] Plasma::Constraints constraints)
 {
 }
 

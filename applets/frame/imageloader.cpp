@@ -40,7 +40,7 @@ ImageLoader::ImageLoader(const QString &path)
 #endif
 }
 
-QImage ImageLoader::correctRotation(const QImage& tempImage, const QString &path)
+QImage ImageLoader::correctRotation(const QImage& tempImage, [[maybe_unused]] const QString &path)
 {
     QImage image = QImage();
     if (!tempImage.isNull()) {
