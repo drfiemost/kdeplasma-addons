@@ -116,7 +116,7 @@ void KdeObservatoryService::commitHistory(QMap<QString, QVariant> &parameters)
 
 void KdeObservatoryService::krazyReport(const QString &project, const QString &krazyReport, const QString &krazyFilePrefix)
 {
-    KIO::StoredTransferJob *job;
+    KIO::StoredTransferJob *job = nullptr;
 
     m_projectKrazyReportMap[project].clear();
 
@@ -131,9 +131,11 @@ void KdeObservatoryService::krazyReport(const QString &project, const QString &k
         job = KIO::storedGet(KUrl("http://www.englishbreakfastnetwork.org/krazy/index.php?" + krazyReport), KIO::NoReload, KIO::HideProgressInfo);
     }
 
-    m_krazyJobMap[job] = QPair<QString, QString>(project, krazyFilePrefix);
+    if (job) {
+        m_krazyJobMap[job] = QPair<QString, QString>(project, krazyFilePrefix);
 
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(resultEBN(KJob*)));
+        connect(job, SIGNAL(result(KJob*)), this, SLOT(resultEBN(KJob*)));
+    }
 }
 
 void KdeObservatoryService::networkStatusChanged(Solid::Networking::Status status)
