@@ -58,6 +58,8 @@
 #include "windowtaskitem.h"
 #include "applauncheritem.h"
 
+#include <vector>
+
 class DropIndicator : public QGraphicsWidget
 {
 public:
@@ -202,9 +204,7 @@ void TaskGroupItem::activateOrIconify()
         // activate
         QList<WId> winOrder(KWindowSystem::stackingOrder());
         const int winCount = winOrder.size();
-        TaskManager::TaskItem* sortedItems[winCount];
-
-        memset(sortedItems, 0, sizeof(TaskManager::TaskItem*) * winCount);
+        std::vector<TaskManager::TaskItem*> sortedItems(winCount);
 
         foreach (TaskManager::AbstractGroupableItem * item, items) {
             TaskManager::TaskItem *task = qobject_cast<TaskManager::TaskItem*>(item);
