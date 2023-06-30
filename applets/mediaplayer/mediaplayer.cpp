@@ -139,23 +139,21 @@ void MediaPlayer::RaiseLower()
 {
     if (m_raised) {
         Lower();
-        m_raised = false;
     } else {
         Raise();
-        m_raised = true;
     }
 }
 
 void MediaPlayer::Raise()
 {
-    Raise();
+    raise();
     m_raised = true;
 }
 
 void MediaPlayer::Lower()
 {
-    Lower();
-    m_raised = true;
+    lower();
+    m_raised = false;
 }
 
 void MediaPlayer::SetPosition(int progress)
