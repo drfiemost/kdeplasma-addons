@@ -22,6 +22,7 @@
 #include <QStringList>
 #include <QVariantList>
 #include <QHash>
+#include <QMap>
 
 class MacroParam
 {
