@@ -94,10 +94,10 @@ void PreviewWidget::setupOptionViewItem()
     m_option.decorationSize = iconSize();
     m_option.displayAlignment = Qt::AlignHCenter;
     m_option.textElideMode = Qt::ElideRight;
-    m_option.features = QStyleOptionViewItemV2::WrapText;
+    m_option.features = QStyleOptionViewItem::WrapText;
     m_option.locale = QLocale::system();
     m_option.widget = 0;
-    m_option.viewItemPosition = QStyleOptionViewItemV4::OnlyOne;
+    m_option.viewItemPosition = QStyleOptionViewItem::OnlyOne;
     m_option.state |= QStyle::State_Enabled;
 }
 

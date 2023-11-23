@@ -31,7 +31,7 @@ class FrameSvg;
 class Svg;
 }
 
-class QStyleOptionViewItemV4;
+class QStyleOptionViewItem;
 class KUrl;
 class QGraphicsSceneWheelEvent;
 class QGraphicsSceneResizeEvent;
@@ -111,7 +111,7 @@ class PreviewWidget : public QGraphicsWidget
        QMap<KUrl, QPixmap> m_previews;
        int m_selectedIndex;
        int m_hoveredIndex;
-       QStyleOptionViewItemV4 m_option;
+       QStyleOptionViewItem m_option;
        QRect m_previewRect;
        bool m_layoutIsValid;
        Plasma::FrameSvg *m_panel;
