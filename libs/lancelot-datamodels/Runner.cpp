@@ -31,6 +31,8 @@
 #include "Logger.h"
 #include "FavoriteApplications.h"
 
+#include <algorithm>
+
 #define SLEEP 200
 
 namespace Lancelot {
@@ -176,7 +178,7 @@ void Runner::setQueryMatches(const QList< Plasma::QueryMatch > & m)
         d->valid = false;
     } else {
         QList < Plasma::QueryMatch > matches = m;
-        qSort(matches.begin(), matches.end());
+        std::sort(matches.begin(), matches.end());
 
         while (matches.size()) {
             Plasma::QueryMatch match = matches.takeLast();

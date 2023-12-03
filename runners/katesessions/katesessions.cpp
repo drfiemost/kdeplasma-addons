@@ -31,6 +31,8 @@
 #include <KStringHandler>
 #include <QFile>
 
+#include <algorithm>
+
 bool katesessions_runner_compare_sessions(const QString &s1, const QString &s2) {
     return KStringHandler::naturalCompare(s1,s2)==-1;
 }
@@ -98,7 +100,7 @@ void KateSessions::loadSessions()
         name.chop(12);///.katesession==12
         sessions.append( name );
     }
-    qSort(sessions.begin(),sessions.end(),katesessions_runner_compare_sessions);
+    std::sort(sessions.begin(),sessions.end(),katesessions_runner_compare_sessions);
     m_sessions = sessions;
 }
 

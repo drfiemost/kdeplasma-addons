@@ -75,6 +75,7 @@
 
 #include <cmath>
 #include <iterator>
+#include <algorithm>
 
 struct Tile {
     QPixmap left;
@@ -179,7 +180,7 @@ static QColor dominantColor(const QIcon &icon)
     }
 
     colors.resize(count);
-    qSort(colors.begin(), colors.end(), hsvLess);
+    std::sort(colors.begin(), colors.end(), hsvLess);
 
     int mid = count / 2;
     QColor midColor(colors[mid]);
