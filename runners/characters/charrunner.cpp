@@ -52,7 +52,6 @@ void CharacterRunner::reloadConfiguration()
 void CharacterRunner::match(Plasma::RunnerContext &context)
 {
     QString term = context.query();
-    QString specChar;
 
     term = term.replace(QLatin1Char( ' ' ), QLatin1String( "" )); //remove blanks
     if (term.length() < 2) //ignore too short queries
@@ -78,14 +77,12 @@ void CharacterRunner::match(Plasma::RunnerContext &context)
     }
 
     //make special caracter out of the hex.-code
-    specChar=QString();
-    specChar.toUtf8();
-    specChar[0]=hex;
+    const QString specChar = QChar(hex);
 
     //create match
     Plasma::QueryMatch match(this);
     match.setType(Plasma::QueryMatch::InformationalMatch);
-    match.setIcon(KIcon(QLatin1String( "accessories-character-map" )));
+    match.setIcon(KIcon(QStringLiteral( "accessories-character-map" )));
     match.setText(specChar);
     match.setData(specChar);
     match.setId(QString());
