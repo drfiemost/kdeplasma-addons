@@ -266,7 +266,7 @@ void bballApplet::configurationChanged()
             m_sound_url = ui.soundFile->url().path();
             cg.writeEntry("SoundURL", m_sound_url);
             if (m_soundPlayer)
-                m_soundPlayer->setCurrentSource(m_sound_url);
+                m_soundPlayer->setCurrentSource(ui.soundFile->url());
         } else
             KMessageBox::error(0, i18n("The given sound could not be loaded. The sound will not be changed."));
     }
@@ -411,7 +411,7 @@ void bballApplet::playBoingSound()
     // create the player if missing
     if (!m_soundPlayer) {
         m_soundPlayer = new Phonon::MediaObject(this);
-        m_soundPlayer->setCurrentSource(m_sound_url);
+        m_soundPlayer->setCurrentSource(KUrl::fromPath(m_sound_url));
         m_audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
         m_audioOutput->setVolume(m_sound_volume);
         createPath(m_soundPlayer, m_audioOutput);
