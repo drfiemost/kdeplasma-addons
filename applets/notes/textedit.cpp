@@ -25,6 +25,7 @@
 #include <QtGui/QGraphicsTextItem>
 #include <QtGui/QScrollBar>
 #include <QtGui/QMenu>
+#include <QtCore/QTextStream>
 
 #include <KAction>
 #include <KConfigDialog>

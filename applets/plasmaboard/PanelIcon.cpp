@@ -27,6 +27,7 @@
 #include <KIcon>
 #include <KWindowSystem>
 #include <KStandardDirs>
+#include <kdebug.h>
 
 #include <plasma/theme.h>
 #include <Plasma/ToolTipManager>

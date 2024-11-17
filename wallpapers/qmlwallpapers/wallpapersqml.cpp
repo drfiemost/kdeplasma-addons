@@ -32,6 +32,9 @@
 #include <QPainter>
 #include <QListView>
 #include <QDir>
+
+#include <kdebug.h>
+
 #include "ui_viewconfig.h"
 
 K_EXPORT_PLASMA_WALLPAPER(org.kde.wallpaper-qml, WallpaperQml)
