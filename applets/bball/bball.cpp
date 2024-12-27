@@ -321,7 +321,7 @@ void bballApplet::updatePhysics()
     // find out the delta-time since the last call
     if (m_time.isNull())
         m_time.start();
-    qreal dT = qMin((qreal)m_time.restart() / 1000.0, 0.5);
+    qreal dT = std::min((qreal)m_time.restart() / 1000.0, 0.5);
 
     // skip progessing if externally moved (disabled because plasma moves this too frequently)
     //if (m_geometry != geometry())
@@ -389,7 +389,7 @@ void bballApplet::updatePhysics()
     m_angle += m_angularVelocity * dT;
 
     // stop animation if reached bottom and still
-    if (m_velocity.length() < 10.0 && qAbs(m_angularVelocity) < 0.1 && !m_auto_bounce_enabled) {
+    if (m_velocity.length() < 10.0 && std::abs(m_angularVelocity) < 0.1 && !m_auto_bounce_enabled) {
         m_timer.stop();
         update();
         return;

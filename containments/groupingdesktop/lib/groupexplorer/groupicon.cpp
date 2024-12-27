@@ -74,7 +74,7 @@ QSizeF GroupIcon::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
         getContentsMargins(&l, &t, &r, &b);
         QFontMetrics fm(font());
         const int minHeight = m_iconHeight + 2 + fm.height();
-        QSizeF s(qMax(m_iconHeight, fm.width(m_name)) + l + r, minHeight + t + b);
+        QSizeF s(std::max(m_iconHeight, fm.width(m_name)) + l + r, minHeight + t + b);
         return s;
     }
 
@@ -151,7 +151,7 @@ void GroupIcon::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     const int height = rect.height();
 
     QRectF textRect(rect.x(), rect.y(), width, height - m_iconHeight - 2);
-    QRect iconRect(rect.x() + qMax(0, (width / 2) - (m_iconHeight / 2)), textRect.bottom() + 2, m_iconHeight, m_iconHeight);
+    QRect iconRect(rect.x() + std::max(0, (width / 2) - (m_iconHeight / 2)), textRect.bottom() + 2, m_iconHeight, m_iconHeight);
     //QRectF textRect(rect.x(), iconRect.bottom() + 2, width, height - iconRect.height() - 2);
 
     painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));

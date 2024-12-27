@@ -166,7 +166,7 @@ qreal ActionListViewItemFactory::preferredWidth() const //>
 {
     qreal result = 0;
     foreach (ActionListViewItem * item, m_items) {
-        result = qMax(result, item->preferredWidth());
+        result = std::max(result, item->preferredWidth());
     }
     return result;
 }

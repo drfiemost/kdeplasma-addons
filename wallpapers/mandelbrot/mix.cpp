@@ -53,6 +53,6 @@ unsigned char qreal_to_uchar_color_channel(qreal t)
   qreal probability_to_add_one = t_scaled - floor_t_scaled;
   // note: qrand() is thread-safe, std::rand() isn't.
   qreal result = floor_t_scaled + (qrand() < int(qreal(RAND_MAX)*probability_to_add_one) ? qreal(1) : qreal(0));
-  int result_int_clamped = (int) CLAMP(result, qreal(0), qreal(255));
+  int result_int_clamped = (int) std::clamp(result, qreal(0), qreal(255));
   return (unsigned char) result_int_clamped;
 }

@@ -38,7 +38,7 @@ void ShiftKey::paint(QPainter *painter)
     painter->setRenderHint(QPainter::Antialiasing);
     painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
     setUpPainter(painter);
-    int unit = qMin(size().width(), size().height()) / 8;
+    int unit = std::min(size().width(), size().height()) / 8;
 
     const QPointF points[7] = {
         QPointF(0, -3 * unit),

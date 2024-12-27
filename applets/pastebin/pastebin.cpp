@@ -272,7 +272,7 @@ void Pastebin::constraintsEvent(Plasma::Constraints constraints)
 int Pastebin::iconSize()
 {
     // return the biggest fitting icon size from KIconLoader
-    int c = qMin(contentsRect().width(), contentsRect().height());
+    int c = std::min(contentsRect().width(), contentsRect().height());
     int s;
     if (c >= KIconLoader::SizeEnormous) { // 128
         s = KIconLoader::SizeEnormous;

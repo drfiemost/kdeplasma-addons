@@ -39,7 +39,7 @@ void EnterKey::paint(QPainter *painter)
     painter->setRenderHint(QPainter::Antialiasing);
     painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
     setUpPainter(painter);
-    int unit = qMin(size().width(), size().height()) / 8;
+    int unit = std::min(size().width(), size().height()) / 8;
 
     painter->drawLine(-1 * unit, 0, 2 * unit, 0);
     painter->drawLine(2 * unit, 0, 2 * unit, -1 * unit);

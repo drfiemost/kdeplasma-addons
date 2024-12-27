@@ -264,7 +264,7 @@ void KimpanelInputPanelGraphics::updateLookupTable()
 {
     clearLookupTable();
 
-    int length = qMin(m_labels.size(), m_candidates.size());
+    int length = std::min(m_labels.size(), m_candidates.size());
     for (int i = 0; i < length; i ++) {
         KimpanelLabelGraphics* item = NULL;
         if (m_tableEntryLabels.length() < i + 1) {
@@ -323,8 +323,8 @@ void KimpanelInputPanelGraphics::updateVisible()
 
 void KimpanelInputPanelGraphics::updateDummyWidget()
 {
-    m_dummyWidget->setMinimumHeight(qMax(m_preeditLabel->minimumHeight(), m_auxLabel->minimumHeight()));
-    m_dummyWidget->setMaximumHeight(qMax(m_preeditLabel->minimumHeight(), m_auxLabel->minimumHeight()));
+    m_dummyWidget->setMinimumHeight(std::max(m_preeditLabel->minimumHeight(), m_auxLabel->minimumHeight()));
+    m_dummyWidget->setMaximumHeight(std::max(m_preeditLabel->minimumHeight(), m_auxLabel->minimumHeight()));
 }
 
 bool KimpanelInputPanelGraphics::markedVisible()

@@ -76,7 +76,7 @@ void KrazyReportView::updateViews(const Plasma::DataEngine::Data &data)
 
         int maxRank = 0;
         qreal height = container->geometry().height() - fileTypeText->boundingRect().height();
-        qreal step = qMin(container->geometry().width() / projectFileTypeKrazyReport.size(), (qreal) 22);
+        qreal step = std::min(container->geometry().width() / projectFileTypeKrazyReport.size(), (qreal) 22);
 
         QMultiMap<int, QString> orderedTestMap;
         

@@ -83,7 +83,7 @@ bool PasteMacroExpander::expandMacro(const QString &str, QStringList &ret)
     }
     //kDebug() << str << func << args;
     if (m_macros.keys().contains(func)) {
-        QMetaObject::invokeMethod(this, func.toAscii(), Qt::DirectConnection,
+        QMetaObject::invokeMethod(this, func.toAscii().constData(), Qt::DirectConnection,
                                   Q_RETURN_ARG(QString, result),
                                   Q_ARG(QString, args));
         ret += result;
@@ -148,7 +148,7 @@ QString PasteMacroExpander::password(const QString& args)
     QString result;
 
     if (a.count() > 0) {
-        charCount = qMax(a[0].trimmed().toInt(), 8);
+        charCount = std::max(a[0].trimmed().toInt(), 8);
     }
 
     if (a.count() < 2) {

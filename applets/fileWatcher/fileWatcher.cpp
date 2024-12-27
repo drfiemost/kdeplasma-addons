@@ -286,7 +286,7 @@ QSizeF FileWatcher::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
 {
     QSizeF hint = QGraphicsWidget::sizeHint(which, constraint);
     if (which == Qt::PreferredSize) {
-        hint.setHeight(qMax((qreal)200.0, textItem->document()->size().height()));
+        hint.setHeight(std::max((qreal)200.0, textItem->document()->size().height()));
     }
 
     return hint;

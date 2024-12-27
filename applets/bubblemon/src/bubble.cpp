@@ -124,7 +124,7 @@ void
 Bubble::resizeEvent(QGraphicsSceneResizeEvent *evt)
 {
     Plasma::Applet::resizeEvent(evt);
-    qreal size = qMin(contentsRect().size().width(), contentsRect().size().height());
+    qreal size = std::min(contentsRect().size().width(), contentsRect().size().height());
     m_svg->resize(size, size);
     m_bubbleRect = m_svg->elementSize("bubble");
     m_rebuildClip = true;
@@ -343,7 +343,7 @@ Bubble::dataUpdated(QString name, Plasma::DataEngine::Data data)
     if (data["max"].toDouble()>0)
         m_max = data["max"].toDouble();
     else
-        m_max = qMax(m_max, m_val);
+        m_max = std::max(m_max, m_val);
     
     m_label = data["name"].toString();
     
@@ -382,8 +382,8 @@ Bubble::dataUpdated(QString name, Plasma::DataEngine::Data data)
         m_interpolator->start();
     }
     
-    int lower = qMin(m_val, prev);
-    int upper = qMax(m_val, prev);
+    int lower = std::min(m_val, prev);
+    int upper = std::max(m_val, prev);
     
     //formula taken fron Bubble::paintInterface
     QRect toUpdate(0, geometry().height()-(geometry().height()*((float)upper/m_max)),

@@ -238,7 +238,7 @@ void mandelbrot_render_tile_impl<Real>::computePacket(int x, int y, Color3 *pixe
     // In other words, we are trying to get optimal contrast. This is important as otherwise there could be
     // almost no contrast at all and an interesting viewpoint could give an almost blank image.
     t = (t-tmin)/(1.f-tmin);
-    t = CLAMP(t, Real(0), Real(1));
+    t = std::clamp(t, Real(0), Real(1));
 
     float threshold1 = 0.09f;
     float threshold2 = 0.3f;

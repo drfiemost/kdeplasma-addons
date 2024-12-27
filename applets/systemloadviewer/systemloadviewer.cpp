@@ -257,7 +257,7 @@ qreal SystemLoadViewer::heightForWidth(qreal w) const
 
 int SystemLoadViewer::cpuCount() const
 {
-    return qMax(1, m_showMultiCPU ? (int)m_numCPUs : 1);
+    return std::max(1, m_showMultiCPU ? (int)m_numCPUs : 1);
 }
 
 int SystemLoadViewer::barCount() const
@@ -480,7 +480,7 @@ void SystemLoadViewer::dataUpdated(const QString& source, const Plasma::DataEngi
             }
         }
 
-        m_swaptotal = qMax(0.1, m_swaptotal); //Make sure we never have a zero value for swap total, avoiding division by 0 errors.
+        m_swaptotal = std::max(0.1, m_swaptotal); //Make sure we never have a zero value for swap total, avoiding division by 0 errors.
     } else if (source.startsWith(QLatin1String("mem/physical/"))) {
         if (source.endsWith(QLatin1String("/application"))) {
             m_ramapps = data["value"].toDouble();
@@ -494,7 +494,7 @@ void SystemLoadViewer::dataUpdated(const QString& source, const Plasma::DataEngi
             m_ramfree = data["value"].toDouble();
         }
 
-        m_ramtotal = qMax(1.0, m_ramused + m_ramfree);
+        m_ramtotal = std::max(1.0, m_ramused + m_ramfree);
     }
 
     // if the tooltip is visible, keep the displayed data up-to-date

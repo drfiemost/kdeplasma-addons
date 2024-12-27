@@ -33,8 +33,8 @@ Layout::Layout(QString path)
     // reading in header information
     if (xmlReader->readNextStartElement()) {
         if (xmlReader->name() == "keyboard") {
-            m_name = i18n(xmlReader->attributes().value("title").toString().toAscii());
-            m_description = i18n(xmlReader->attributes().value("description").toString().toAscii());
+            m_name = i18n(xmlReader->attributes().value("title").toString().toAscii().constData());
+            m_description = i18n(xmlReader->attributes().value("description").toString().toAscii().constData());
         }
     }
 

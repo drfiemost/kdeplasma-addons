@@ -37,7 +37,7 @@ bool FuncKey::repeats() const
 
 void FuncKey::paintArrow(QPainter *painter)
 {
-    int unit = qMin(size().width(), size().height()) / 8;
+    int unit = std::min(size().width(), size().height()) / 8;
     painter->drawLine(-1 * unit, 0 , 3 * unit, 0);
 
     const QPointF points[3] = {
@@ -52,7 +52,7 @@ void FuncKey::paintArrow(QPainter *painter)
 void FuncKey::paintLabel(QPainter *painter)
 {
     painter->save();
-    int fontSize = qMin(size().width(), size().height()) / 5 - (label().size() / 6 + 1);
+    int fontSize = std::min(size().width(), size().height()) / 5 - (label().size() / 6 + 1);
     painter->setFont(QFont(Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont).toString(), fontSize));
     painter->setPen(Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor));
     painter->drawText(rect(), Qt::AlignCenter, label());

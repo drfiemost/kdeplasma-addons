@@ -94,7 +94,7 @@ void SingleFeedItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option,
     m_doc.setHtml(text);
     text = m_doc.toPlainText();
     QFontMetrics fm(font);
-    const int titleHeight = qMax(16, fm.height());
+    const int titleHeight = std::max(16, fm.height());
     p->drawText(QRectF(22, 2, width - 24, titleHeight),
                 Qt::AlignLeft | Qt::AlignBottom, text);
 

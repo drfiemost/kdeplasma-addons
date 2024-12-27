@@ -231,10 +231,10 @@ void MediaPlayer::keyPressEvent(QKeyEvent *event)
         PlayPause();
         break;
     case Qt::Key_Up:
-        audio->setVolume(qMin(qreal(1.0), (qreal)(audio->volume() + 0.1)));
+        audio->setVolume(std::min(qreal(1.0), (qreal)(audio->volume() + 0.1)));
         break;
     case Qt::Key_Down:
-        audio->setVolume(qMax(qreal(0.0), (qreal)(audio->volume() - 0.1)));
+        audio->setVolume(std::max(qreal(0.0), (qreal)(audio->volume() - 0.1)));
         break;
     case Qt::Key_R:
         RaiseLower();

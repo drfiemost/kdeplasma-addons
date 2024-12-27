@@ -500,7 +500,7 @@ QSize DockConfigItemDelegate::sizeHint(const QStyleOptionViewItem &option, const
     QFontMetrics fmTitle(font);
 
     return QSize(fmTitle.width(index.model()->data(index, Qt::DisplayRole).toString()) + KIconLoader::SizeMedium + constMargin * 5 + pushButton->sizeHint().width(),
-                 qMax(KIconLoader::SizeMedium + constMargin * 2, fmTitle.height() + option.fontMetrics.height() + constMargin * 2));
+                 std::max(KIconLoader::SizeMedium + constMargin * 2, fmTitle.height() + option.fontMetrics.height() + constMargin * 2));
 }
 
 QList<QWidget*> DockConfigItemDelegate::createItemWidgets() const

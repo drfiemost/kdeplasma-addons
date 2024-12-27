@@ -273,7 +273,7 @@ void ComicArchiveJob::defineTotalNumber( const QString &currentSuffix )
             const QDate to = QDate::fromString( mToIdentifierSuffix, "yyyy-MM-dd" );
             if ( current.isValid() && to.isValid() ) {
                 //processed files + files still to download
-                mTotalFiles = mProcessedFiles + qAbs( current.daysTo( to ) );
+                mTotalFiles = mProcessedFiles + std::abs( current.daysTo( to ) );
             }
         } else if ( mIdentifierType == Number ) {
             bool result = true;
@@ -284,7 +284,7 @@ void ComicArchiveJob::defineTotalNumber( const QString &currentSuffix )
             result = ( result && ok );
             if ( result ) {
                 //processed files + files still to download
-                mTotalFiles = mProcessedFiles + qAbs( to - current );
+                mTotalFiles = mProcessedFiles + std::abs( to - current );
             }
         }
     }
@@ -304,7 +304,7 @@ void ComicArchiveJob::findTotalNumberFromTo()
         const QDate from = QDate::fromString( mFromIdentifierSuffix, "yyyy-MM-dd" );
         const QDate to = QDate::fromString( mToIdentifierSuffix, "yyyy-MM-dd" );
         if ( from.isValid() && to.isValid() ) {
-            mTotalFiles = qAbs( from.daysTo( to ) ) + 1;
+            mTotalFiles = std::abs( from.daysTo( to ) ) + 1;
         }
     } else if ( mIdentifierType == Number ) {
         bool result = true;
@@ -314,7 +314,7 @@ void ComicArchiveJob::findTotalNumberFromTo()
         const int to = mToIdentifierSuffix.toInt( &ok );
         result = ( result && ok );
         if ( result ) {
-            mTotalFiles = qAbs( to - from ) + 1;
+            mTotalFiles = std::abs( to - from ) + 1;
         }
     }
 }

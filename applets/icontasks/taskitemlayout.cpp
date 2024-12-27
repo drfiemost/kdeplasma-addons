@@ -284,9 +284,9 @@ int TaskItemLayout::maximumRows()
     //TODO basicPreferredSize isn't the optimal source here because  it changes because of margins probably
     QSizeF itemSize = m_itemPositions.first()->basicPreferredSize();
     if (m_layoutOrientation == Qt::Vertical) {
-        maxRows = qMin(qMax(1, int(m_groupItem->geometry().width() / itemSize.width())), m_maxRows);
+        maxRows = std::min(std::max(1, int(m_groupItem->geometry().width() / itemSize.width())), m_maxRows);
     } else {
-        maxRows = qMin(qMax(1, int(m_groupItem->geometry().height() / itemSize.height())), m_maxRows);
+        maxRows = std::min(std::max(1, int(m_groupItem->geometry().height() / itemSize.height())), m_maxRows);
     }
 
     //kDebug() << "maximum rows: " << maxRows << m_maxRows << m_groupItem->geometry().height() << itemSize.height();
@@ -307,15 +307,15 @@ int TaskItemLayout::preferredColumns()
         QSizeF itemSize = m_itemPositions.first()->basicPreferredSize();
         //kDebug() << itemSize.width() << m_groupItem->geometry().width();
         if (m_layoutOrientation == Qt::Vertical) {
-            m_rowSize = qMax(1, int(m_groupItem->geometry().height() / itemSize.height()));
+            m_rowSize = std::max(1, int(m_groupItem->geometry().height() / itemSize.height()));
         } else {
             //Launchers doesn't need the same space as task- and groupitems on horizontal Layouts so the size needs to be adjusted
             qreal horizontalSpace = m_groupItem->geometry().width();
-            m_rowSize = qMax(1, int(horizontalSpace / itemSize.width()));
+            m_rowSize = std::max(1, int(horizontalSpace / itemSize.width()));
         }
     }
-    //kDebug() << "preferred columns: " << qMax(1, m_rowSize);
-    return qMax(1, m_rowSize);
+    //kDebug() << "preferred columns: " << std::max(1, m_rowSize);
+    return std::max(1, m_rowSize);
 }
 
 // <columns,rows>
@@ -347,7 +347,7 @@ void TaskItemLayout::layoutItems()
     //kDebug();
 
     QPair<int, int> grid = gridLayoutSize();
-    int columns = qMax(grid.first, 1);
+    int columns = std::max(grid.first, 1);
 
     //FIXME: resetting column preferred sizesthey shouldn't be taken into account for inexistent ones but they are, probably upstream issue
     for (int i = 0; i < columnCount(); ++i) {
@@ -369,7 +369,7 @@ void TaskItemLayout::layoutItems()
     }
 
     QRectF groupRect(m_groupItem->boundingRect());
-    qreal cellSize(qMin(m_applet->launcherIcons() || !m_applet->autoIconScaling() ? qreal(272) : qreal(80), qMin(groupRect.width(), groupRect.height())));
+    qreal cellSize(std::min(m_applet->launcherIcons() || !m_applet->autoIconScaling() ? qreal(272) : qreal(80), std::min(groupRect.width(), groupRect.height())));
     QSizeF maximumCellSize(cellSize, cellSize);
 
     setHorizontalSpacing(m_applet->spacing());

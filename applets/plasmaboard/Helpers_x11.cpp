@@ -47,7 +47,7 @@ void initialiseMap(QHash<unsigned int, QChar>& map);
 
 void changeKeycodeMapping(unsigned int code, QString &sym)
 {
-    KeySym keysym = XStringToKeysym(sym.toAscii());
+    KeySym keysym = XStringToKeysym(sym.toAscii().constData());
     QVector<KeySym> keysyms(keysymsPerKeycode);
     for (int i = 0; i < keysymsPerKeycode; ++i) {
         keysyms[i] = keysym;
@@ -58,13 +58,13 @@ void changeKeycodeMapping(unsigned int code, QString &sym)
 
 void changeKeycodeMapping(unsigned int code, QString &sym, QString &shiftedSym)
 {
-    KeySym keysym = XStringToKeysym(sym.toAscii());
+    KeySym keysym = XStringToKeysym(sym.toAscii().constData());
     QVector<KeySym> keysyms(keysymsPerKeycode);
     for (int i = 0; i < keysymsPerKeycode; ++i) {
         keysyms[i] = keysym;
     }
 
-    keysyms[1] = XStringToKeysym(shiftedSym.toAscii());
+    keysyms[1] = XStringToKeysym(shiftedSym.toAscii().constData());
     pendingKeycodeChanges.insert(code, keysyms);
 }
 

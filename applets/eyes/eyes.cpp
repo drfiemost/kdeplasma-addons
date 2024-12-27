@@ -74,7 +74,7 @@ void Eyes::constraintsEvent(Plasma::Constraints constraints)
             setMaximumSize(QSizeF());
         }
 
-        double pupilSize = qMin( qMin(boundingRect().width()/2, boundingRect().height()) / 5,
+        double pupilSize = std::min( std::min(boundingRect().width()/2, boundingRect().height()) / 5,
                                  (boundingRect().width()/2 + boundingRect().height()) / 12);
 
         leftPupil->resize(pupilSize, pupilSize);

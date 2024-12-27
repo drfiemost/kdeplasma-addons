@@ -101,7 +101,7 @@ void MicroBlog::constraintsEvent(Plasma::Constraints constraints)
 
 void MicroBlog::paintIcon()
 {
-    int size = qMin(contentsRect().width(), contentsRect().height());
+    int size = std::min(contentsRect().width(), contentsRect().height());
     if (size < 1) {
         size = KIconLoader::SizeSmall;
     }
@@ -121,7 +121,7 @@ void MicroBlog::paintIcon()
         QFont font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
         QFontMetrics fm(font);
         QRect textRect(fm.boundingRect(QString::number(m_newTweets)));
-        int textSize = qMax(textRect.width(), textRect.height());
+        int textSize = std::max(textRect.width(), textRect.height());
         textRect.setSize(QSize(textSize, textSize));
         textRect.moveBottomRight(icon.rect().bottomRight());
 
@@ -602,7 +602,7 @@ void MicroBlog::dataUpdated(const QString& source, const Plasma::DataEngine::Dat
         }
         //kDebug() << m_lastTweet << maxId << "<-- updated";
         m_lastTweet = maxId;
-        m_newTweets = qMin(newCount, m_historySize);
+        m_newTweets = std::min(newCount, m_historySize);
 
         if (m_newTweets > 0) {
             m_flash->flash( i18np( "1 new tweet", "%1 new tweets", m_newTweets ), 20*1000 );

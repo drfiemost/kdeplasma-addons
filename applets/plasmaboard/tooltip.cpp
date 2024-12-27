@@ -73,7 +73,7 @@ void Tooltip::resizeEvent(QResizeEvent *event)
 {
     QSize size = event->size();
     QWidget::resize(size);
-    setFont(QFont("Helvetica", qMin(size.height(), size.width()) / 3));
+    setFont(QFont("Helvetica", std::min(size.height(), size.width()) / 3));
     frame->resizeFrame(size);
     updateMask();
 }

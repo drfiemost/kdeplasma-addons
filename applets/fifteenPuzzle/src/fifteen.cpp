@@ -57,7 +57,7 @@ void Fifteen::setSize(int size)
     if (m_size == size) {
         return;
     }
-    m_size = qMax(size, 1);
+    m_size = std::max(size, 1);
     startBoard();
     setPreferredSize(48 * size, 48 * size);
     setMinimumSize(24 * size, 24 * size);

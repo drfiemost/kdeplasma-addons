@@ -393,7 +393,7 @@ void PreviewWidget::expandingSlot(qreal progress)
         m_scrollBar->show();
     }
 
-    m_animationHeight = qMax(qreal(min), min - 1 + ((size().height() - min)  * progress));
+    m_animationHeight = std::max(qreal(min), min - 1 + ((size().height() - min)  * progress));
 
     calculateRects();
     update();
@@ -449,7 +449,7 @@ int PreviewWidget::bottomBorderHeight() const
     }
 
     QFontMetrics fm(KGlobalSettings::smallestReadableFont());
-    return qMax(fm.height() + s_spacing * 2, svgHeight);
+    return std::max(fm.height() + s_spacing * 2, svgHeight);
 }
 
 void PreviewWidget::paint(QPainter *painter,

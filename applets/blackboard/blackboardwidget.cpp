@@ -87,10 +87,10 @@ void BlackBoardWidget::drawSegment(QPointF point0, QPointF point1, qreal penRadi
     m_painter.setPen(QPen(m_color, penRadius));
     m_painter.drawLine(point0, point1);
 
-    qreal x = qMin(point0.x(), point1.x()) -(penRadius + 1);
-    qreal y = qMin(point0.y(), point1.y()) -(penRadius + 1);
-    qreal w = qMax(point0.x(), point1.x()) + penRadius + 1 - x;
-    qreal h = qMax(point0.y(), point1.y()) + penRadius + 1 - y;
+    qreal x = std::min(point0.x(), point1.x()) -(penRadius + 1);
+    qreal y = std::min(point0.y(), point1.y()) -(penRadius + 1);
+    qreal w = std::max(point0.x(), point1.x()) + penRadius + 1 - x;
+    qreal h = std::max(point0.y(), point1.y()) + penRadius + 1 - y;
 
     update(x,y,w,h);
     m_changed = true;  

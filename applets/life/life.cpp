@@ -166,8 +166,8 @@ void Life::paintInterface(QPainter *p, const QStyleOptionGraphicsItem *option, c
 {
     Q_UNUSED(option)
 
-    const int cellHeight = (int) qMax(1, contentsRect.height() / m_cellsArrayHeight);
-    const int cellWidth = (int) qMax(1, contentsRect.width() / m_cellsArrayWidth);
+    const int cellHeight = (int) std::max(1, contentsRect.height() / m_cellsArrayHeight);
+    const int cellWidth = (int) std::max(1, contentsRect.width() / m_cellsArrayWidth);
     int y = contentsRect.y() + (contentsRect.height() - cellHeight * m_cellsArrayHeight) / 2;
     const int x = contentsRect.x() + (contentsRect.width() - cellWidth * m_cellsArrayWidth) / 2;
 

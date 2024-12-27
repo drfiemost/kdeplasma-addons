@@ -473,7 +473,7 @@ void Tasks::resizeItemBackground(const QSizeF &size)
 
     //if the task height is too little shrink the top and bottom margins
     if (size.height() - m_topMargin - m_bottomMargin < KIconLoader::SizeSmall) {
-        m_topMargin = m_bottomMargin = qMax(1, int((size.height() - KIconLoader::SizeSmall) / 2));
+        m_topMargin = m_bottomMargin = std::max(1, int((size.height() - KIconLoader::SizeSmall) / 2));
     }
     m_taskItemBackground->setElementPrefix(oldPrefix);
 }

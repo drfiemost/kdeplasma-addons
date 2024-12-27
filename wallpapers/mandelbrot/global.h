@@ -29,8 +29,6 @@
 #define HAVE_PATH_WITH_SSE2_EXPLICTLY_ENABLED
 #endif
 
-#define CLAMP(val, min, max) qMin(qMax(val, min), max)
-
 #define MANDELBROT_CENTER_KEY      "mandelbrotcenter"
 #define MANDELBROT_ZOOM_KEY        "mandelbrotzoom"
 #define MANDELBROT_COLOR1_KEY      "mandelbrotcolor1"

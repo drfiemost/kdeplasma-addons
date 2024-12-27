@@ -95,7 +95,7 @@ void FifteenPuzzle::configChanged()
   m_showNumerals = cg.readEntry("ShowNumerals", true);
 
   m_board->setColor(cg.readEntry("boardColor", QColor()));
-  m_board->setSize(qMax(4, cg.readEntry("boardSize", 4)));
+  m_board->setSize(std::max(4, cg.readEntry("boardSize", 4)));
 
   if (!m_usePlainPieces) {
       if (!QFile::exists(m_imagePath)) {

@@ -39,7 +39,7 @@ void CapsKey::paint(QPainter *painter)
     painter->setRenderHint(QPainter::Antialiasing);
     setUpPainter(painter);
 
-    int unit = qMin(size().width(), size().height()) / 8;
+    int unit = std::min(size().width(), size().height()) / 8;
 
     const QPointF points[7] = {
         QPointF(0, 3 * unit),

@@ -320,7 +320,7 @@ int Notes::fontSize()
 {
     if (m_autoFont) {
         int autosize = qRound(((geometry().width() + geometry().height())/2)*m_autoFontPercent/100)  + m_wheelFontAdjustment;
-        return qMax(KGlobalSettings::smallestReadableFont().pointSize(), autosize);
+        return std::max(KGlobalSettings::smallestReadableFont().pointSize(), autosize);
     } else {
         return m_customFontSize + m_wheelFontAdjustment;
     }

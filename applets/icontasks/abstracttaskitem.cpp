@@ -136,9 +136,9 @@ static bool isNear(const QColor &c1, const QColor &c2)
     c2.getHsv(&h2, &s2, &v2);
 
     return
-        qAbs(h1 - h2) <=  8 &&
-        qAbs(s1 - s2) <= 16 &&
-        qAbs(v1 - v2) <= 32;
+        std::abs(h1 - h2) <=  8 &&
+        std::abs(s1 - s2) <= 16 &&
+        std::abs(v1 - v2) <= 32;
 }
 
 static QColor dominantColor(const QIcon &icon)
@@ -249,8 +249,8 @@ static QColor dominantColor(const QIcon &icon)
 
 const Tile & coloredBackground(const QColor &color, const QSize &size)
 {
-    qreal radius = qMin(4.0, size.width() / 4.0);
-    int sectionWidth = qMax(2, (int)(radius + 1));
+    qreal radius = std::min(4.0, size.width() / 4.0);
+    int sectionWidth = std::max(2, (int)(radius + 1));
 
     quint64 key = (((quint64)(sectionWidth & 0xFFFF)) << 48) +
                   (((quint64)(size.height() & 0xFFFF)) << 32) +
@@ -372,8 +372,8 @@ QSize AbstractTaskItem::basicPreferredSize() const
     QSize mSize = fm.size(0, "M");
     const int iconsize = KIconLoader::SizeSmall;
 
-    int size = (int)qMin((mSize.width() * 12 + m_applet->itemLeftMargin() + m_applet->itemRightMargin() + iconsize),
-                         qMax(mSize.height(), iconsize) + m_applet->itemTopMargin() + m_applet->itemBottomMargin());
+    int size = (int)std::min((mSize.width() * 12 + m_applet->itemLeftMargin() + m_applet->itemRightMargin() + iconsize),
+                         std::max(mSize.height(), iconsize) + m_applet->itemTopMargin() + m_applet->itemBottomMargin());
     return QSize(size, size);
 }
 
@@ -384,8 +384,8 @@ void AbstractTaskItem::setPreferredOffscreenSize()
     QSize mSize = fm.size(0, "M");
     int iconsize = KIconLoader::SizeSmall;
 
-    QSizeF s(qMax(qMin(textWidth, 512) + 8, mSize.width() * 12) + m_applet->offscreenLeftMargin() + m_applet->offscreenRightMargin() + iconsize,
-             qMax(mSize.height(), iconsize) + m_applet->offscreenTopMargin() + m_applet->offscreenBottomMargin());
+    QSizeF s(std::max(std::min(textWidth, 512) + 8, mSize.width() * 12) + m_applet->offscreenLeftMargin() + m_applet->offscreenRightMargin() + iconsize,
+             std::max(mSize.height(), iconsize) + m_applet->offscreenTopMargin() + m_applet->offscreenBottomMargin());
     setPreferredSize(s);
 }
 
@@ -998,7 +998,7 @@ void AbstractTaskItem::drawProgress(QPainter *painter, const QRectF &rect)
 
     m_lastProgress = m_currentProgress;
 
-    double height = qMin(8.0, rect.height() / 4.0);
+    double height = std::min(8.0, rect.height() / 4.0);
     QRectF border(rect.x(), rect.bottom() - (height + 1), rect.width(), height);
     qreal fill = ((border.width() - 1.0) * m_currentProgress) / 100.0;
     Plasma::FrameSvg *svg = m_applet->progressBar();
@@ -1080,7 +1080,7 @@ void AbstractTaskItem::drawIndicators(QPainter *painter, const QRectF &bounds)
     QString position;
     bool vertical = Plasma::Vertical == m_applet->formFactor();
     qreal dimension = vertical ? bounds.height() : bounds.width();
-    qreal size = dimension > 48 ? qMin(24.0, dimension / 4.0) : qMin(12.0, dimension / 2.0);
+    qreal size = dimension > 48 ? std::min(24.0, dimension / 4.0) : std::min(12.0, dimension / 2.0);
     QSizeF iSize(vertical ? size * 0.75 : size, vertical ? size : size * 0.75);
     bool group = qobject_cast<TaskGroupItem *>(this);
     Plasma::Svg *svg = m_applet->indicators();
@@ -1205,7 +1205,7 @@ void AbstractTaskItem::drawShine(QPainter *painter, const QStyleOptionGraphicsIt
 void AbstractTaskItem::addOverlay(QPixmap &pix)
 {
     if (m_dockItem && !m_dockItem->overlayIcon().isNull()) {
-        int overlaySize=(int)(qMin(16.0, qMin(pix.width(), pix.height())/3.0)+0.5);
+        int overlaySize=(int)(std::min(16.0, std::min(pix.width(), pix.height())/3.0)+0.5);
         overlaySize=((overlaySize/4)*4)+(overlaySize%4 ? 4 : 0);
         if(overlaySize>4) {
             QPixmap overlay = m_dockItem->overlayIcon().pixmap(QSize(overlaySize, overlaySize));
@@ -1487,7 +1487,7 @@ void AbstractTaskItem::drawTask(QPainter *painter, const QStyleOptionGraphicsIte
             painter->setPen(txtCol);
             painter->setFont(font());
             if (txtCol.value() < 128 && rect.height() > 4) {
-                int haloWidth = qMin(rect.width(), fm.width(txt));
+                int haloWidth = std::min(rect.width(), fm.width(txt));
                 if (haloWidth > 4) {
                     Plasma::PaintUtils::drawHalo(painter, QRectF(rect.x() + 0.5, rect.y() + 0.5, haloWidth - 1, rect.height() - 1));
                 }
@@ -1794,7 +1794,7 @@ QRectF AbstractTaskItem::iconRect(const QRectF &b, bool showText)
 
     if (showText) {
         //leave enough space for the text. useful in vertical panel
-        bounds.setWidth(qMax(bounds.width() / 3, qMin(minimumSize().height(), bounds.width())));
+        bounds.setWidth(std::max(bounds.width() / 3, std::min(minimumSize().height(), bounds.width())));
 
         //restore right position if the layout is RTL
         if (QApplication::layoutDirection() == Qt::RightToLeft) {
@@ -1838,7 +1838,7 @@ QSize AbstractTaskItem::iconSize(const QRectF &bounds) const
         }
     } else {
         size = bounds.size().toSize(); //
-        int sz = (qMin(size.width(), size.height()) * m_applet->iconScale()) / 100;
+        int sz = (std::min(size.width(), size.height()) * m_applet->iconScale()) / 100;
         size = QSize(sz, sz);
     }
 
@@ -1850,7 +1850,7 @@ QRectF AbstractTaskItem::textRect(const QRectF &bounds)
     QSize size(bounds.size().toSize());
     QRectF effectiveBounds(bounds);
 
-    size.rwidth() -= int(iconRect(bounds, true).width()) + qMax(0, IconTextSpacing - 2);
+    size.rwidth() -= int(iconRect(bounds, true).width()) + std::max(0, IconTextSpacing - 2);
     return QStyle::alignedRect(QApplication::layoutDirection(), Qt::AlignRight | Qt::AlignVCenter, size, effectiveBounds.toRect());
 }
 

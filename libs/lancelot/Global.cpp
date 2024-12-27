@@ -61,7 +61,7 @@ GroupPrivate::~GroupPrivate()
 void GroupPrivate::setObjectProperty(QObject * object,
         const QString & property, const QVariant & value)
 {
-    object->setProperty(property.toAscii(), value);
+    object->setProperty(property.toAscii().constData(), value);
 }
 
 // clearing all info

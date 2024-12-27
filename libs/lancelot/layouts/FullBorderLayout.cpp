@@ -52,13 +52,13 @@ public:
         if (top < 0) {
             top = 0;
             if (itemPositions[FullBorderLayout::TopLeft]) {
-                top = qMax(top, itemPositions[FullBorderLayout::TopLeft]->preferredSize().height());
+                top = std::max(top, itemPositions[FullBorderLayout::TopLeft]->preferredSize().height());
             }
             if (itemPositions[FullBorderLayout::Top]) {
-                top = qMax(top, itemPositions[FullBorderLayout::Top]->preferredSize().height());
+                top = std::max(top, itemPositions[FullBorderLayout::Top]->preferredSize().height());
             }
             if (itemPositions[FullBorderLayout::TopRight]) {
-                top = qMax(top, itemPositions[FullBorderLayout::TopRight]->preferredSize().height());
+                top = std::max(top, itemPositions[FullBorderLayout::TopRight]->preferredSize().height());
             }
         }
 
@@ -67,13 +67,13 @@ public:
         if (bottom < 0) {
             bottom = 0;
             if (itemPositions[FullBorderLayout::BottomLeft]) {
-                bottom = qMax(bottom, itemPositions[FullBorderLayout::BottomLeft]->preferredSize().height());
+                bottom = std::max(bottom, itemPositions[FullBorderLayout::BottomLeft]->preferredSize().height());
             }
             if (itemPositions[FullBorderLayout::Bottom]) {
-                bottom = qMax(bottom, itemPositions[FullBorderLayout::Bottom]->preferredSize().height());
+                bottom = std::max(bottom, itemPositions[FullBorderLayout::Bottom]->preferredSize().height());
             }
             if (itemPositions[FullBorderLayout::BottomRight]) {
-                bottom = qMax(bottom, itemPositions[FullBorderLayout::BottomRight]->preferredSize().height());
+                bottom = std::max(bottom, itemPositions[FullBorderLayout::BottomRight]->preferredSize().height());
             }
         }
 
@@ -82,13 +82,13 @@ public:
         if (left < 0) {
             left = 0;
             if (itemPositions[FullBorderLayout::TopLeft]) {
-                left = qMax(left, itemPositions[FullBorderLayout::TopLeft]->preferredSize().width());
+                left = std::max(left, itemPositions[FullBorderLayout::TopLeft]->preferredSize().width());
             }
             if (itemPositions[FullBorderLayout::Left]) {
-                left = qMax(left, itemPositions[FullBorderLayout::Left]->preferredSize().width());
+                left = std::max(left, itemPositions[FullBorderLayout::Left]->preferredSize().width());
             }
             if (itemPositions[FullBorderLayout::BottomLeft]) {
-                left = qMax(left, itemPositions[FullBorderLayout::BottomLeft]->preferredSize().width());
+                left = std::max(left, itemPositions[FullBorderLayout::BottomLeft]->preferredSize().width());
             }
         }
 
@@ -97,13 +97,13 @@ public:
         if (right < 0) {
             right = 0;
             if (itemPositions[FullBorderLayout::TopRight]) {
-                right = qMax(right, itemPositions[FullBorderLayout::TopRight]->preferredSize().width());
+                right = std::max(right, itemPositions[FullBorderLayout::TopRight]->preferredSize().width());
             }
             if (itemPositions[FullBorderLayout::Right]) {
-                right = qMax(right, itemPositions[FullBorderLayout::Right]->preferredSize().width());
+                right = std::max(right, itemPositions[FullBorderLayout::Right]->preferredSize().width());
             }
             if (itemPositions[FullBorderLayout::BottomRight]) {
-                right = qMax(right, itemPositions[FullBorderLayout::BottomRight]->preferredSize().width());
+                right = std::max(right, itemPositions[FullBorderLayout::BottomRight]->preferredSize().width());
             }
         }
     }

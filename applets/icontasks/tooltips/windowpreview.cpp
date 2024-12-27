@@ -98,10 +98,10 @@ void WindowPreview::setWindows(const QList<ToolTipContent::Window> &wins)
 #ifdef Q_WS_X11
     static const int constMargin = 48;
     QRect screenSize(QApplication::desktop()->screen(x11Info().screen())->geometry().adjusted(constMargin, constMargin, -constMargin, -constMargin));
-    int titleSpace = qMax(ToolTipContent::iconSize(), m_textHeight);
+    int titleSpace = std::max(ToolTipContent::iconSize(), m_textHeight);
 
-    m_maxColumns = m_columns = qMax(4, screenSize.width() / (ToolTipManager::self()->previewWidth() + WINDOW_MARGIN));
-    m_maxRows = m_rows = qMax(1, screenSize.height() / ((havePreviews ? ToolTipManager::self()->previewHeight() : 0) + WINDOW_MARGIN + titleSpace));
+    m_maxColumns = m_columns = std::max(4, screenSize.width() / (ToolTipManager::self()->previewWidth() + WINDOW_MARGIN));
+    m_maxRows = m_rows = std::max(1, screenSize.height() / ((havePreviews ? ToolTipManager::self()->previewHeight() : 0) + WINDOW_MARGIN + titleSpace));
 #endif
 
     int max = m_maxRows * m_maxColumns;
@@ -179,7 +179,7 @@ QSize WindowPreview::sizeHint() const
 
         if ((1 == m_columns && m_rows > 1) || (1 == m_rows && m_columns > 1)) {
             foreach (const QSize & s, m_windowSizes) {
-                maxHeight = qMax(s.height(), maxHeight);
+                maxHeight = std::max(s.height(), maxHeight);
             }
         }
 
@@ -214,7 +214,7 @@ QSize WindowPreview::sizeHint() const
     }
 
     QSize sz(0, 0);
-    int titleSpace = qMax(ToolTipContent::iconSize(), m_textHeight);
+    int titleSpace = std::max(ToolTipContent::iconSize(), m_textHeight);
 
     foreach (int v, m_rowSizes.values()) {
         sz = sz + QSize(0, v + (WINDOW_MARGIN) + titleSpace + (havePreviews ? (WINDOW_MARGIN / 2.0) : 0.0));
@@ -299,7 +299,7 @@ void WindowPreview::setInfo()
     int y = thumbnailRect.y();
     int column = 0;
     int row = 0;
-    int titleHeight = qMax(ToolTipContent::iconSize(), m_textHeight);
+    int titleHeight = std::max(ToolTipContent::iconSize(), m_textHeight);
     int titleSpace = titleHeight + (WINDOW_MARGIN / 2.0);
     bool rtl = QApplication::layoutDirection() == Qt::RightToLeft;
 

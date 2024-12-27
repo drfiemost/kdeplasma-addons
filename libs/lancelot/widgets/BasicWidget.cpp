@@ -33,8 +33,6 @@
 
 #define WIDGET_PADDING 8
 
-#define max(A, B) ((A) >= (B)) ? (A) : (B)
-
 namespace Lancelot
 {
 
@@ -523,7 +521,7 @@ QSizeF BasicWidget::sizeHint(Qt::SizeHint which, const QSizeF & constraint) cons
             QFontMetrics desctiprionMetrics =
                     QFontMetrics(KGlobalSettings::smallestReadableFont());
             QSizeF textSize = QSizeF(
-                    qMax(
+                    std::max(
                         titleMetrics.width(d->title),
                         desctiprionMetrics.width(d->description)
                     ),

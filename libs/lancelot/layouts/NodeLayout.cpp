@@ -154,7 +154,7 @@ public:
             // Calculate size hint for current item
             const QRectF scaled = calculateRectangle(item, QRectF(0, 0, 1, 1));
 
-            // qMin(..., 1.0) so that for autosized elements we don't get smaller
+            // std::min(..., 1.0) so that for autosized elements we don't get smaller
             // size than the item's size itself. The sizeHint for NodeLayout can
             // not do anything smarter concerning the sizeHint when there are
             // autosized elements.
@@ -165,8 +165,8 @@ public:
             {
                 size = item->effectiveSizeHint(which);
                 size.scale(
-                    1 / qMin(scaled.width(), qreal(1.0)),
-                    1 / qMin(scaled.height(), qreal(1.0)),
+                    1 / std::min(scaled.width(), qreal(1.0)),
+                    1 / std::min(scaled.height(), qreal(1.0)),
                     Qt::IgnoreAspectRatio
                 );
                 sizeHintCache[which] = sizeHintCache[which].expandedTo(size);

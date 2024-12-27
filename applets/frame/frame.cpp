@@ -272,7 +272,7 @@ void Frame::constraintsEvent(Plasma::Constraints constraints)
 QSizeF Frame::contentSizeHint() const
 {
     if (!m_pictureSize.isEmpty() && (formFactor() == Plasma::Planar || formFactor() == Plasma::MediaCenter)) {
-        const qreal maxSize = qMax(contentsRect().width(), contentsRect().height());
+        const qreal maxSize = std::max(contentsRect().width(), contentsRect().height());
         QSize size = m_pictureSize;
         size.scale(maxSize, maxSize, Qt::KeepAspectRatio);
         return size;
@@ -308,7 +308,7 @@ void Frame::updatePicture()
 {
     m_pictureSize = m_mySlideShow->image().size();
     QSizeF sizeHint = contentSizeHint();
-    int frameLines = qMin(m_frameOutline, (int)(sizeHint.height()/10));
+    int frameLines = std::min(m_frameOutline, (int)(sizeHint.height()/10));
     const QSize contentsSize = sizeHint.toSize();
 
     if (m_currentUrl.url().isEmpty() && m_mySlideShow->currentUrl().isEmpty()) {
@@ -339,7 +339,7 @@ void Frame::updatePicture()
     QPainter *p = new QPainter();
     p->begin(&m_pixmap);
 
-    int roundingFactor = qMin(qreal(sizeHint.height() / 10), qreal(12.0)) * m_roundCorners;
+    int roundingFactor = std::min(qreal(sizeHint.height() / 10), qreal(12.0)) * m_roundCorners;
     int swRoundness = roundingFactor + frameLines / 2 * m_frame * m_roundCorners;
 
     QRectF frameRect(QPoint(0, 0), contentsSize);
@@ -369,7 +369,7 @@ void Frame::updatePicture()
         // The shadow is a couple of lines with decreasing opacity painted around the path
         p->setBrush(Qt::NoBrush);
         QPen pen = QPen(Qt::black, 1, Qt::SolidLine, Qt::FlatCap, Qt::RoundJoin);
-        int shadowLines = qMin((int)(sizeHint.height() / 6), m_swOutline);
+        int shadowLines = std::min((int)(sizeHint.height() / 6), m_swOutline);
 
         // The shadow is drawn from inside to the outside
         shadowRect.adjust(+shadowLines, +shadowLines, -shadowLines, -shadowLines);
@@ -446,7 +446,7 @@ void Frame::updatePicture()
         // Set the font and draw text
         p->setRenderHint(QPainter::Antialiasing);
         QFont textFont = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DefaultFont);
-        textFont.setPointSize(qMax(KGlobalSettings::smallestReadableFont().pointSize(), bgRect.height() / 6));
+        textFont.setPointSize(std::max(KGlobalSettings::smallestReadableFont().pointSize(), bgRect.height() / 6));
         p->setFont(textFont);
 
         QTextOption option;
@@ -481,7 +481,7 @@ QRect Frame::preparePainter(QPainter *p, const QRect &rect, const QFont &font, c
         if (first) {
             first = false;
         } else  {
-            tmpFont.setPointSize(qMax(KGlobalSettings::smallestReadableFont().pointSize(), tmpFont.pointSize() - 1));
+            tmpFont.setPointSize(std::max(KGlobalSettings::smallestReadableFont().pointSize(), tmpFont.pointSize() - 1));
         }
 
         const QFontMetrics fm(tmpFont);

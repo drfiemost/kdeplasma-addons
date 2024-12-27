@@ -134,13 +134,13 @@ void Magnifique::syncViewToScene()
     QRect mappedRect(m_view->transform().inverted().mapRect(QRect(QPoint(0,0), m_view->size())));
 
     QPoint viewPos = m_view->mapToGlobal(m_view->pos());
-    QRect originalRect(scenePosFromScreenPos(QPoint(qMax(viewPos.x(), 0), qMax(viewPos.y(), 0))).toPoint(), m_view->size());
+    QRect originalRect(scenePosFromScreenPos(QPoint(std::max(viewPos.x(), 0), std::max(viewPos.y(), 0))).toPoint(), m_view->size());
 
     mappedRect.moveCenter(originalRect.center());
 
     //avoid to show negative coordinates in the view - we don't want to show the panel :)
-    mappedRect.moveTop(qMax(mappedRect.top(), 0));
-    mappedRect.moveLeft(qMax(mappedRect.left(), 0));
+    mappedRect.moveTop(std::max(mappedRect.top(), 0));
+    mappedRect.moveLeft(std::max(mappedRect.left(), 0));
 
     m_view->setSceneRect(mappedRect);
 }

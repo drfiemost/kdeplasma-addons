@@ -302,7 +302,7 @@ void FlowGroup::updateContents()
         if (m_prevArrow->isVisible()) {
             geom.setWidth(geom.width() + m_prevArrow->geometry().width() * 2 + SPACING * 2);
         }
-        m_container->resize(qMax(m_container->size().width(), geom.width()), geom.height());
+        m_container->resize(std::max(m_container->size().width(), geom.width()), geom.height());
         m_container->setMaximumHeight(geom.height());
         foreach (QGraphicsWidget *c, childs) {
             c->resize(c->size().width(), geom.height());
@@ -311,7 +311,7 @@ void FlowGroup::updateContents()
         if (m_prevArrow->isVisible()) {
             geom.setHeight(geom.height() + m_prevArrow->geometry().height() * 2 + SPACING * 2);
         }
-        m_container->resize(geom.width(), qMax(m_container->size().height(), geom.height()));
+        m_container->resize(geom.width(), std::max(m_container->size().height(), geom.height()));
         m_container->setMaximumWidth(geom.width());
         foreach (QGraphicsWidget *c, childs) {
             c->resize(geom.width(), c->size().height());

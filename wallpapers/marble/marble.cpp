@@ -211,7 +211,7 @@ void MarbleWallpaper::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
     if (m_movement == Interactive) {
         event->accept();
-        m_zoom = qMax(qreal(0), m_zoom + (event->delta() > 0 ? 40 : -40));
+        m_zoom = std::max(qreal(0), m_zoom + (event->delta() > 0 ? 40 : -40));
         qreal radius = pow(M_E, (m_zoom / 200.0));
         m_map->setRadius(radius);
 

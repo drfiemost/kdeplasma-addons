@@ -339,8 +339,8 @@ void Mandelbrot::translateView(const QPointF& _delta)
         srcy = delta.y()>0 ? 0 : -delta.y(),
         dstx = delta.x()>0 ? delta.x() : 0,
         dsty = delta.y()>0 ? delta.y() : 0,
-        w = m_image->width() - qAbs(delta.x()),
-        h = m_image->height() - qAbs(delta.y());
+        w = m_image->width() - std::abs(delta.x()),
+        h = m_image->height() - std::abs(delta.y());
     QImage part = m_image->copy(srcx,srcy,w,h);
     m_image->fill(0);
     QPainter(m_image).drawImage(QPointF(dstx,dsty), part);
@@ -348,7 +348,7 @@ void Mandelbrot::translateView(const QPointF& _delta)
 
     // compute which pixel to render first, so we start with the tiles the user is most interested in
     qreal renderfirstx, renderfirsty;
-    if(delta.y()!=0 && qAbs(_delta.x()/_delta.y())<qAbs(qreal(width())/height()))
+    if(delta.y()!=0 && std::abs(_delta.x()/_delta.y())<std::abs(qreal(width())/height()))
     {
       if(delta.y()>0)
       {
@@ -393,20 +393,20 @@ void Mandelbrot::zoomView(const QPointF& at, qreal zoomFactor)
     m_center += (oldResolution - newResolution) * (at - QPointF(width()/2, height()/2));
 
     // now scale part the old image and merge it immediately into m_image to give the user a sense of speed
-    qreal srcwidth = width() * qMin(zoomFactor,(qreal)(1.0));
-    qreal srcheight = height() * qMin(zoomFactor,(qreal)(1.0));
+    qreal srcwidth = width() * std::min(zoomFactor,(qreal)(1.0));
+    qreal srcheight = height() * std::min(zoomFactor,(qreal)(1.0));
     qreal srcleft = at.x() - srcwidth/2.;
     qreal srcright = at.x() + srcwidth/2.;
     qreal srctop = at.y() - srcheight/2.;
     qreal srcbottom = at.y() + srcheight/2.;
-    qreal srcleft_c = CLAMP(srcleft, (qreal)(0.0), (qreal)width());
-    qreal srcright_c = CLAMP(srcright, (qreal)(0.0), (qreal)width());
-    qreal srctop_c = CLAMP(srctop, (qreal)(0.0), (qreal)height());
-    qreal srcbottom_c = CLAMP(srcbottom, (qreal)(0.0), (qreal)height());
+    qreal srcleft_c = std::clamp(srcleft, (qreal)(0.0), (qreal)width());
+    qreal srcright_c = std::clamp(srcright, (qreal)(0.0), (qreal)width());
+    qreal srctop_c = std::clamp(srctop, (qreal)(0.0), (qreal)height());
+    qreal srcbottom_c = std::clamp(srcbottom, (qreal)(0.0), (qreal)height());
     qreal srcwidth_c = srcright_c - srcleft_c;
     qreal srcheight_c = srcbottom_c - srctop_c;
-    qreal dstwidth = width() * qMin(1./zoomFactor,1.);
-    qreal dstheight = height() * qMin(1./zoomFactor,1.);
+    qreal dstwidth = width() * std::min(1./zoomFactor,1.);
+    qreal dstheight = height() * std::min(1./zoomFactor,1.);
     qreal dstleft = at.x() - dstwidth/2.;
     qreal dsttop = at.y() - dstheight/2.;
     QImage part(srcwidth, srcheight, m_image->format());

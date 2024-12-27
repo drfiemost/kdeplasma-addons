@@ -498,7 +498,7 @@ void Clock::calculateSize()
                 m_subtitleString = m_dateString + '\n' + m_timezoneString; //Set subtitleString
 
                 //set subtitleSize
-                m_subtitleStringSize = QSizeF ( qMax( m_dateStringSize.width(),m_timezoneStringSize.width() ) , m_dateStringSize.height()*2 );
+                m_subtitleStringSize = QSizeF ( std::max( m_dateStringSize.width(),m_timezoneStringSize.width() ) , m_dateStringSize.height()*2 );
             }
         } else if ( m_showDate == true ) {
             kDebug() << "Only Date enabled";
@@ -526,7 +526,7 @@ void Clock::calculateSize()
         }
 
         //Make the timestring fit the plasmoid since it is bigger than minimumWantedSize
-        m_fontTime.setPointSize(qMax((int)( geometry().size().height()/1.5), minimumWantedSize) );
+        m_fontTime.setPointSize(std::max((int)( geometry().size().height()/1.5), minimumWantedSize) );
 
         m_fmTime = QFontMetrics( m_fontTime );
 
@@ -580,12 +580,12 @@ void Clock::calculateSize()
                 m_subtitleString = m_dateString + '\n' + m_timezoneString; //Set subtitleString
 
                 //set subtitleSize
-                m_subtitleStringSize = QSizeF ( qMax ( m_dateStringSize.width(),m_timezoneStringSize.width() ), m_dateStringSize.height()*2 );
+                m_subtitleStringSize = QSizeF ( std::max ( m_dateStringSize.width(),m_timezoneStringSize.width() ), m_dateStringSize.height()*2 );
 
-                kDebug() << "max: " << qMax ( m_timeStringSize.width(),qMax ( m_dateStringSize.width(),m_timezoneStringSize.width() ) ) << " timestring: " << m_timeStringSize.width() << "date: " << m_dateStringSize.width() << "timezone: " << m_timezoneStringSize.width();
+                kDebug() << "max: " << std::max ( m_timeStringSize.width(),std::max ( m_dateStringSize.width(),m_timezoneStringSize.width() ) ) << " timestring: " << m_timeStringSize.width() << "date: " << m_dateStringSize.width() << "timezone: " << m_timezoneStringSize.width();
 
                 //set new minimal width to fit widest string and adjust the height
-                m_minimumContentSize = QSizeF ( qMax ( m_timeStringSize.width(),qMax ( m_dateStringSize.width(),m_timezoneStringSize.width() ) ),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
+                m_minimumContentSize = QSizeF ( std::max ( m_timeStringSize.width(),std::max ( m_dateStringSize.width(),m_timezoneStringSize.width() ) ),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
             }
         } else if ( m_showDate == true ) {
             kDebug() << "Only date is enabled";
@@ -595,7 +595,7 @@ void Clock::calculateSize()
             m_subtitleStringSize = QSizeF ( m_dateStringSize.width(), m_dateStringSize.height() );
 
             //set new minimal width to fit the widest string
-            m_minimumContentSize = QSizeF ( qMax ( m_dateStringSize.width(),m_timeStringSize.width() ),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
+            m_minimumContentSize = QSizeF ( std::max ( m_dateStringSize.width(),m_timeStringSize.width() ),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
         } else if ( m_showTimezone == true ) {
             kDebug() << "Only timezone is enabled";
             m_subtitleString = m_timezoneString; //Set subtitleString
@@ -604,7 +604,7 @@ void Clock::calculateSize()
             m_subtitleStringSize = QSizeF ( m_timezoneStringSize.width(), m_timezoneStringSize.height() );
 
             //set new size to fit the strings
-            m_minimumContentSize = QSizeF ( qMax ( m_timezoneStringSize.width(),m_timeStringSize.width() ),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
+            m_minimumContentSize = QSizeF ( std::max ( m_timezoneStringSize.width(),m_timeStringSize.width() ),m_timeStringSize.height() + m_verticalSpacing + m_subtitleStringSize.height() );
         } else { //no subtitle
             kDebug() << "Neither timezone nor date are enabled";
             //set subtitleSize
@@ -631,7 +631,7 @@ void Clock::calculateSize()
             //FIXME: if the clock is the only applet on a vertical panel and returns 0 via expandingDirections(), it still gets the full height of the panel as recommended height, i.e. on a vertical panel width a height of 800, geometry().size().height() does not return 48 but some huge value. Unless this is fixed in plasma, the while-loop will take a while.
 
             //Make the timestring fit the plasmoid since it is bigger than minimumWantedSize
-            m_fontTime.setPointSize(qMax((int)( geometry().size().height()/1.5), minimumWantedSize) );
+            m_fontTime.setPointSize(std::max((int)( geometry().size().height()/1.5), minimumWantedSize) );
         
             m_fmTime = QFontMetrics( m_fontTime );
         
