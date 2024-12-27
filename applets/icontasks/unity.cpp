@@ -30,6 +30,7 @@
 #include <KDE/KGlobal>
 #include <KDE/KSycoca>
 #include <KDE/OrgKdeKLauncherInterface>
+#include <kdebug.h>
 
 static const QString constDbusService = "com.canonical.Unity";
 static const QString constDbusObject = "/Unity";

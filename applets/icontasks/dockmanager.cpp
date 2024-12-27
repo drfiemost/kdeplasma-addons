@@ -39,6 +39,7 @@
 #include <QtDBus/QDBusServiceWatcher>
 #include <sys/types.h>
 #include <signal.h>
+#include <kdebug.h>
 
 static const QString constDbusService = "net.launchpad.DockManager";
 static const QString constDbusObject = "/net/launchpad/DockManager";
