@@ -19,18 +19,19 @@
 #ifndef IMAGEICONENGINE_H
 #define IMAGEICONENGINE_H
 
-#include <QtGui/QIconEngineV2>
+#include <QtGui/QIconEngine>
 #include <QtGui/QIcon>
 
-class ImageIconEngine : public QIconEngineV2
+class ImageIconEngine : public QIconEngine
 {
     public:
         ImageIconEngine(const QImage &image);
-        ~ImageIconEngine();
+        ~ImageIconEngine() override;
 
-        QSize actualSize(const QSize &size, QIcon::Mode mode, QIcon::State state);
-        void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state);
-        QPixmap pixmap(const QSize &size, QIcon::Mode mode, QIcon::State state);
+        QSize actualSize(const QSize &size, QIcon::Mode mode, QIcon::State state) override;
+        void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state) override;
+        QPixmap pixmap(const QSize &size, QIcon::Mode mode, QIcon::State state) override;
+        QIconEngine *clone() const override;
 
     private:
         QImage m_image;

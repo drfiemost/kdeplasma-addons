@@ -62,3 +62,8 @@ QPixmap ImageIconEngine::pixmap(const QSize &size, QIcon::Mode mode, QIcon::Stat
     return QApplication::style()->generatedIconPixmap(mode, QPixmap::fromImage(image), &opt);
 }
 
+QIconEngine *ImageIconEngine::clone() const
+{
+    return new ImageIconEngine(*this);
+}
+
