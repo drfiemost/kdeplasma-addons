@@ -98,10 +98,11 @@ class ColorIconEngine : public QIconEngine
 {
     public:
         ColorIconEngine(const QColor &color);
-        virtual ~ColorIconEngine();
+        ~ColorIconEngine() override;
 
-        virtual void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state);
-        virtual QPixmap pixmap(const QSize &size, QIcon::Mode mode, QIcon::State state);
+        void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state) override;
+        QPixmap pixmap(const QSize &size, QIcon::Mode mode, QIcon::State state) override;
+        ColorIconEngine* clone() const override;
 
     public:
         QColor m_color;
@@ -134,6 +135,11 @@ QPixmap ColorIconEngine::pixmap(const QSize &size, QIcon::Mode mode, QIcon::Stat
     paint(&p, pix.rect(), mode, state);
     p.end();
     return pix;
+}
+
+ColorIconEngine* ColorIconEngine::clone() const
+{
+    return new ColorIconEngine(*this);
 }
 
 class ColorIcon : public QIcon
