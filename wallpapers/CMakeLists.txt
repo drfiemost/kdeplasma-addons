@@ -7,8 +7,3 @@ add_subdirectory(weather)
 if(KDeclarative_FOUND)
     add_subdirectory(qmlwallpapers)
 endif(KDeclarative_FOUND)
-
-if(MARBLE_FOUND)
-    add_subdirectory(marble)
-endif(MARBLE_FOUND)
-

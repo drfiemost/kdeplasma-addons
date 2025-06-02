@@ -31,14 +31,6 @@ macro_log_feature(KDeclarative_FOUND "kdeclarative" "KDE Declarative (QML) suppo
 macro_optional_find_package(QJSON)
 macro_log_feature(QJSON_FOUND "QJSon" "Used for various Internet runners, for parsing API responses, and the microblog dataengine" "http://qjson.sourceforge.net/" FALSE "" "")
 
-macro_optional_depend_package(Marble "Marble")
-if (DEPEND_PACKAGE_Marble)
-  macro_optional_find_package(Marble)
-else (DEPEND_PACKAGE_Marble)
-  set (MARBLE_FOUND FALSE)
-endif (DEPEND_PACKAGE_Marble)
-macro_log_feature(MARBLE_FOUND "Marble" "Desktop Globe" "http://marble.kde.org" FALSE "" "RECOMMENDED: Marble is used to provide a desktop globe wallpaper for Plasma.")
-
 macro_optional_find_package(DBusMenuQt)
 macro_log_feature(DBUSMENUQT_FOUND "DBusMenuQt" "DBusMenu Qt" "https://launchpad.net/libdbusmenu-qt/" FALSE "" "Needed for Unity support in IconTasks.")
 
