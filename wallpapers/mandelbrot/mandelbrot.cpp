@@ -131,7 +131,7 @@ void Mandelbrot::readConfig(const KConfigGroup &config, int options)
     m_color1 = config.readEntry(MANDELBROT_COLOR1_KEY, QColor(0,0,0));
     m_color2 = config.readEntry(MANDELBROT_COLOR2_KEY, QColor(255,255,255));
     m_color3 = config.readEntry(MANDELBROT_COLOR3_KEY, QColor(0,0,255));
-    m_quality = qBound(0, config.readEntry(MANDELBROT_QUALITY_KEY, 1), 4);
+    m_quality = std::clamp(config.readEntry(MANDELBROT_QUALITY_KEY, 1), 0, 4);
 
     if(options & ReadLockStatus)
     {

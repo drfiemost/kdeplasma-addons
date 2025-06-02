@@ -107,8 +107,7 @@ static QPixmap scaleIcon(const QIcon &icon, const QSize &sz, const QPixmap &pix)
 {
     static const int constStep = 4;
     QSize s((sz.width() / constStep)*constStep, (sz.height() / constStep)*constStep);
-    QString key;
-    key.sprintf("%llx-%x-%x", icon.cacheKey(), s.width(), s.height());
+    QString key = QString::asprintf("%llx-%x-%x", icon.cacheKey(), s.width(), s.height());
     if (scaledCache.contains(key)) {
         return *scaledCache[key];
     }

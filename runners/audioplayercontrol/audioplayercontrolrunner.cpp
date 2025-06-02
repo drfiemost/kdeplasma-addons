@@ -340,9 +340,9 @@ void AudioPlayerControlRunner::reloadConfiguration()
     m_comNext = grp.readEntry(CONFIG_NEXT, i18n("next"));
     m_comMute = grp.readEntry(CONFIG_MUTE, i18n("mute"));
     m_comIncrease = grp.readEntry(CONFIG_INCREASE, i18n("increase"));
-    m_increaseBy = qBound(0, grp.readEntry(CONFIG_INCREASE_BY, 15), 100);
+    m_increaseBy = std::clamp(grp.readEntry(CONFIG_INCREASE_BY, 15), 0, 100);
     m_comDecrease = grp.readEntry(CONFIG_DECREASE, i18n("decrease"));
-    m_decreaseBy = qBound(0, grp.readEntry(CONFIG_DECREASE_BY, 15), 100);
+    m_decreaseBy = std::clamp(grp.readEntry(CONFIG_DECREASE_BY, 15), 0, 100);
     m_comPrev = grp.readEntry(CONFIG_PREV, i18n("prev"));
     m_comStop = grp.readEntry(CONFIG_STOP, i18n("stop"));
     m_comVolume = grp.readEntry(CONFIG_VOLUME, i18n("volume"));
