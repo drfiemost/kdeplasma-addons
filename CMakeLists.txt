@@ -20,8 +20,6 @@ include(MacroOptionalDependPackage)
 macro_optional_find_package(KDE4Workspace)
 macro_log_feature(KDE4WORKSPACE_FOUND "kdebase workspace" "KDE base workspace libraries" "http://www.kde.org" FALSE "" "Needed for building several Plasma plugins")
 
-macro_optional_find_package(KdepimLibs)
-macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "KDE PIM libraries" "http://www.kde.org" FALSE "" "Needed for building several Plasma plugins")
 find_package(Boost)
 
 macro_optional_find_package(OpenGL)
