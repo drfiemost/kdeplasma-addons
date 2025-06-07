@@ -30,8 +30,6 @@
 
 #include "Logger.h"
 
-#include "config-lancelot-datamodels.h"
-
 #ifdef LANCELOT_THE_COMPILER_DOESNT_NEED_TO_PROCESS_THIS
 // just in case messages:
 I18N_NOOP("Unread messages");
