@@ -354,7 +354,7 @@ void WeatherWallpaper::pictureChanged(int index)
 
     QString conditionIndexValue = m_advancedUi.m_conditionCombo->itemData(m_advancedUi.m_conditionCombo->currentIndex()).toString();
     fillMetaInfo(b);
-    if (b->structure()->contentsPrefix().isEmpty()) {
+    if (b->structure()->contentsPrefixPaths().isEmpty() || b->structure()->contentsPrefixPaths().first().isEmpty()) {
         // it's not a full package, but a single paper
         m_weatherMap[conditionIndexValue] = b->filePath("preferred");
     } else {

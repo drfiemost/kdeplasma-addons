@@ -39,7 +39,7 @@ TrackListDBusHandler::TrackListDBusHandler(QObject *parent, Phonon::MediaObject 
 
 int TrackListDBusHandler::AddTrack( const QString& url, bool playImmediately )
 {
-    Phonon::MediaSource source(url);
+    Phonon::MediaSource source(QUrl::fromLocalFile(url));
     if (source.type() != Phonon::MediaSource::Invalid) {
         m_tracks.append(source);
         if (playImmediately) {
