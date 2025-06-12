@@ -46,7 +46,6 @@ add_subdirectory(applets)
 add_subdirectory(dataengines)
 add_subdirectory(runners)
 
-add_subdirectory(scriptengines)
 add_subdirectory(wallpapers)
 add_subdirectory(containments)
 add_subdirectory(cmake)
