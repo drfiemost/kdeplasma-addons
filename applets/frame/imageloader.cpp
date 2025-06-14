@@ -22,59 +22,62 @@
 #include <QImage>
 #include <kdebug.h>
 
-#ifdef HAVE_KEXIV2
-#include <libkexiv2/kexiv2.h>
+#ifdef HAVE_EXIV2
+#  include <exiv2/exiv2.hpp>
 #endif
 
-ImageLoader::ImageLoader(const QString &path)
-{
-    m_path = path;
-#ifdef HAVE_KEXIV2 
-    // prevets crashes due the xmp library not having a thread safe init
-    // may get fixed in future version of exiv2 according to devs
-    // FIXME: due to not knowing when it is safe to *uninitialize* exiv2 since others
-    // may be using it, this may ultimately result in a small one-time memory leak;
-    // either we need to know all users of KExiv2, or the thread safety issue needs
-    // to get fixed.
-    KExiv2Iface::KExiv2::initializeExiv2();
-#endif
-}
+ImageLoader::ImageLoader(const QString &path) :
+    m_path(path)
+{}
 
 QImage ImageLoader::correctRotation(const QImage& tempImage, [[maybe_unused]] const QString &path)
 {
     QImage image = QImage();
     if (!tempImage.isNull()) {
-#ifdef HAVE_KEXIV2 
-        KExiv2Iface::KExiv2 exif(path);
+#ifdef HAVE_EXIV2
+
+#if EXIV2_TEST_VERSION(0, 28, 0)
+        Exiv2::Image::UniquePtr img;
+#else
+        Exiv2::Image::AutoPtr img;
+#endif
+        std::string fileString = path.toStdString();
+        img = Exiv2::ImageFactory::open(fileString);
+        const Exiv2::ExifData& data = img->exifData();
+        Exiv2::ExifData::const_iterator it = data.findKey(Exiv2::ExifKey("Exif.Image.Orientation"));
+        int64_t orientation = 0;
+        if (it != data.end()) {
+            orientation = it->toInt64();
+        }
         QMatrix m;
-        switch (exif.getImageOrientation()) {
-        case KExiv2Iface::KExiv2::ORIENTATION_HFLIP:
+        switch (orientation) {
+        case 2: // HFLIP
             m.scale(-1.0,1.0);
             image = tempImage.transformed(m);
             break;
-        case KExiv2Iface::KExiv2::ORIENTATION_ROT_180:
+        case 3: // ROT_180
             m.rotate(180);
             image = tempImage.transformed(m);
             break;
-        case KExiv2Iface::KExiv2::ORIENTATION_VFLIP:
+        case 4: // VFLIP
             m.scale(1.0,-1.0);
             image = tempImage.transformed(m);
             break;
-        case KExiv2Iface::KExiv2::ORIENTATION_ROT_90:
-            m.rotate(90);
-            image = tempImage.transformed(m);
-            break;
-        case KExiv2Iface::KExiv2::ORIENTATION_ROT_90_HFLIP:
+        case 5: // ROT_90_HFLIP
             m.rotate(90);
             m.scale(-1.0,1.0);
             image = tempImage.transformed(m);
             break;
-        case KExiv2Iface::KExiv2::ORIENTATION_ROT_90_VFLIP:
+        case 6: // ROT_90
+            m.rotate(90);
+            image = tempImage.transformed(m);
+            break;
+        case 7: // ROT_90_VFLIP
             m.rotate(90);
             m.scale(1.0,-1.0);
             image = tempImage.transformed(m);
             break;
-        case KExiv2Iface::KExiv2::ORIENTATION_ROT_270:
+        case 8: // ROT_270
             m.rotate(270);
             image = tempImage.transformed(m);
             break;

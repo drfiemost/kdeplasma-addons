@@ -1,7 +1,9 @@
 project(plasma-frame)
 
-macro_optional_find_package(Kexiv2)
-macro_log_feature(KEXIV2_FOUND "libkexiv2" "Library to access EXIF information" "http://www.kde.org" FALSE "0.2.0" "RECOMMENDED: Enables automatic rotation for frame applet" )
+find_package(Exiv2 0.21)
+set_package_properties(Exiv2 PROPERTIES DESCRIPTION "Image Tag reader"
+                       URL "http://www.exiv2.org" TYPE OPTIONAL
+                       PURPOSE "RECOMMENDED: Enables automatic rotation for frame applet")
 
 set(frame_SRCS
     frame.cpp
@@ -13,19 +15,17 @@ set(frame_SRCS
 
 kde4_add_ui_files(frame_SRCS imageSettings.ui appearanceSettings.ui)
 
-macro_bool_to_01(KEXIV2_FOUND HAVE_KEXIV2)
-
 kde4_add_plugin(plasma_applet_frame ${frame_SRCS})
 
 
-if(HAVE_KEXIV2)
-    include_directories( ${KEXIV2_INCLUDE_DIR} )
-    set_source_files_properties(picture.cpp imageloader.cpp PROPERTIES
-                               COMPILE_FLAGS -DHAVE_KEXIV2)
-    target_link_libraries(plasma_applet_frame ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KFILE_LIBS} ${KEXIV2_LIBRARIES} )
-else (HAVE_KEXIV2)
+if(EXIV2_FOUND)
+    include_directories( ${EXIV2_INCLUDE_DIR} )
+    set_source_files_properties(imageloader.cpp PROPERTIES
+                               COMPILE_FLAGS "-DHAVE_EXIV2 ${KDE4_ENABLE_EXCEPTIONS}")
+    target_link_libraries(plasma_applet_frame ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KFILE_LIBS} ${EXIV2_LIBRARIES} )
+else ()
     target_link_libraries(plasma_applet_frame ${KDE4_PLASMA_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KFILE_LIBS} )
-endif(HAVE_KEXIV2)
+endif()
 
 install(TARGETS plasma_applet_frame DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-frame-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})
