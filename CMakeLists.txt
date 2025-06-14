@@ -28,14 +28,13 @@ macro_log_feature(OPENGL_FOUND "OpenGL" "API for developing portable, interactiv
 macro_optional_find_package(KDeclarative)
 macro_log_feature(KDeclarative_FOUND "kdeclarative" "KDE Declarative (QML) support from kdelibs" "http://www.kde.org" FALSE "" "Required by qmlwallpapers")
 
-macro_optional_find_package(QJSON)
-macro_log_feature(QJSON_FOUND "QJSon" "Used for various Internet runners, for parsing API responses, and the microblog dataengine" "http://qjson.sourceforge.net/" FALSE "" "")
-
 macro_optional_find_package(DBusMenuQt)
 macro_log_feature(DBUSMENUQT_FOUND "DBusMenuQt" "DBusMenu Qt" "https://launchpad.net/libdbusmenu-qt/" FALSE "" "Needed for Unity support in IconTasks.")
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+add_definitions(-DKDE_NO_DEPRECATED)
+
 include_directories (${KDE4_INCLUDES}
                      ${KDE4WORKSPACE_INCLUDE_DIR}
                      ${KDEPIMLIBS_INCLUDE_DIR}
