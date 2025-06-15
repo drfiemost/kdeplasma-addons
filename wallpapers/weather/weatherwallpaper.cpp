@@ -53,7 +53,6 @@ WeatherWallpaper::WeatherWallpaper(QObject * parent, const QVariantList & args )
     , m_fadeValue(0)
     , m_animation(0)
     , m_model(0)
-    , m_newStuffDialog(0)
 {
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(updateBackground(QImage)));
 }
@@ -326,9 +325,7 @@ void WeatherWallpaper::showAdvancedDialog()
                 this, SLOT(positioningChanged(int)));
 
         m_advancedUi.m_color->setColor(m_color);
-        m_advancedUi.m_newStuff->setIcon(KIcon(QLatin1String( "get-hot-new-stuff" )));
         connect(m_advancedUi.m_color, SIGNAL(changed(QColor)), this, SLOT(colorChanged(QColor)));
-        connect(m_advancedUi.m_newStuff, SIGNAL(clicked()), this, SLOT(getNewWallpaper()));
     }
     KDialog::centerOnScreen(m_advancedDialog);
     connect(m_advancedDialog, SIGNAL(destroyed(QObject*)), this, SLOT(advancedDialogDestroyed()));
