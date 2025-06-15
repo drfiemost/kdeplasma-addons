@@ -46,10 +46,6 @@ namespace Plasma
     class Service;
 }
 
-namespace KNS3 {
-    class DownloadDialog;
-}
-
 class Pastebin : public Plasma::Applet
 {
     Q_OBJECT

@@ -53,7 +53,6 @@ WeatherWallpaper::WeatherWallpaper(QObject * parent, const QVariantList & args )
     , m_fadeValue(0)
     , m_animation(0)
     , m_model(0)
-    , m_newStuffDialog(0)
 {
     connect(this, SIGNAL(renderCompleted(QImage)), this, SLOT(updateBackground(QImage)));
 }
