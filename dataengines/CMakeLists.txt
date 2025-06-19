@@ -1,6 +1,5 @@
 add_subdirectory(comic)
 add_subdirectory(potd)
-add_subdirectory(kdeobservatory)
 add_subdirectory(kimpanel)
 add_subdirectory(konsoleprofiles)
 add_subdirectory(konqprofiles)
